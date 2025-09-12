@@ -1,0 +1,157 @@
+| Problem No | Problem Name                                               | Problem Link | Solution Link |
+|------------|------------------------------------------------------------|--------------|---------------|
+| 3          | Longest Substring Without Repeating Characters             |              |               |
+| 30         | Substring with Concatenation of All Words                  |              |               |
+| 76         | Minimum Window Substring                                   |              |               |
+| 159        | Longest Substring with At Most Two Distinct Characters     |              |               |
+| 187        | Repeated DNA Sequences                                     |              |               |
+| 209        | Minimum Size Subarray Sum                                  |              |               |
+| 219        | Contains Duplicate II                                      |              |               |
+| 220        | Contains Duplicate III                                     |              |               |
+| 239        | Sliding Window Maximum                                     |              |               |
+| 340        | Longest Substring with At Most K Distinct Characters       |              |               |
+| 395        | Longest Substring with At Least K Repeating Characters     |              |               |
+| 413        | Arithmetic Slices                                          |              |               |
+| 424        | Longest Repeating Character Replacement                    |              |               |
+| 438        | Find All Anagrams in a String                              |              |               |
+| 480        | Sliding Window Median                                      |              |               |
+| 487        | Max Consecutive Ones II                                    |              |               |
+| 567        | Permutation in String                                      |              |               |
+| 594        | Longest Harmonious Subsequence                             |              |               |
+| 632        | Smallest Range Covering Elements from K Lists              |              |               |
+| 643        | Maximum Average Subarray I                                 |              |               |
+| 658        | Find K Closest Elements                                    |              |               |
+| 683        | K Empty Slots                                              |              |               |
+| 689        | Maximum Sum of 3 Non-Overlapping Subarrays                 |              |               |
+| 713        | Subarray Product Less Than K                               |              |               |
+| 718        | Maximum Length of Repeated Subarray                        |              |               |
+| 727        | Minimum Window Subsequence                                 |              |               |
+| 837        | New 21 Game                                                |              |               |
+| 862        | Shortest Subarray with Sum at Least K                      |              |               |
+| 904        | Fruit Into Baskets                                         |              |               |
+| 930        | Binary Subarrays With Sum                                  |              |               |
+| 978        | Longest Turbulent Subarray                                 |              |               |
+| 992        | Subarrays with K Different Integers                        |              |               |
+| 995        | Minimum Number of K Consecutive Bit Flips                  |              |               |
+| 1004       | Max Consecutive Ones III                                   |              |               |
+| 1016       | Binary String With Substrings Representing 1s              |              |               |
+| 1031       | Maximum Sum of Two Non-Overlapping Subarrays               |              |               |
+| 1040       | Moving Stones Until Consecutive II                         |              |               |
+| 1044       | Longest Duplicate Substring                                |              |               |
+| 1052       | Grumpy Bookstore Owner                                     |              |               |
+| 1100       | Find K-Length Substrings With No Repeated Characters       |              |               |
+| 1151       | Minimum Swaps to Group All 1's Together                    |              |               |
+| 1156       | Swap For Longest Repeated Character Substring              |              |               |
+| 1176       | Diet Plan Performance                                      |              |               |
+| 1208       | Get Equal Substrings Within Budget                         |              |               |
+| 1234       | Replace the Substring for Balanced String                  |              |               |
+| 1248       | Count Number of Nice Subarrays                             |              |               |
+| 1297       | Maximum Number of Occurrences of a Substring               |              |               |
+| 1343       | Number of Sub-arrays of Size K and AverageG                |              |               |
+| 1358       | Number of Substrings Containing All Three Characters       |              |               |
+| 1423       | Maximum Points You Can Obtain from Cards                   |              |               |
+| 1425       | Constrained Subsequence Sum                                |              |               |
+| 1438       | Longest Continuous Subarray With Absolute                  |              |               |
+| 1456       | Maximum Number of Vowels in a Substring                    |              |               |
+| 1477       | Find Two Non-overlapping Sub-arrays Each With Target Sum   |              |               |
+| 1493       | Longest Subarray of 1's After Deleting One Element         |              |               |
+| 1499       | Max Value of Equation                                      |              |               |
+| 1610       | Maximum Number of Visible Points                           |              |               |
+| 1652       | Defuse the Bomb                                            |              |               |
+| 1658       | Minimum Operations to Reduce X to Zero                     |              |               |
+| 1695       | Maximum Erasure Value                                      |              |               |
+| 1703       | Minimum Adjacent Swaps for K Consecutive Ones              |              |               |
+| 1763       | Longest Nice Substring                                     |              |               |
+| 1838       | Frequency of the Most Frequent Element                     |              |               |
+| 1839       | Longest Substring Of All Vowels in Order                   |              |               |
+| 1852       | Distinct Numbers in Each Subarray                          |              |               |
+| 1871       | Jump Game VII                                              |              |               |
+| 1876       | Substrings of Size Three with Distinct Characters          |              |               |
+| 1888       | Minimum Number of Flips to Make the Binary                 |              |               |
+| 1918       | Kth Smallest Subarray Sum                                  |              |               |
+| 1984       | Minimum Difference Between Highest and Lowest of K Scores  |              |               |
+| 2009       | Minimum Number of Operations to Make Array Continuous      |              |               |
+| 2024       | Maximize the Confusion of an Exam                          |              |               |
+| 2067       | Number of Equal Count Substrings                           |              |               |
+| 2090       | K Radius Subarray Averages                                 |              |               |
+| 2106       | Maximum Fruits Harvested After at Most K Steps             |              |               |
+| 2107       | Number of Unique Flavors After Sharing K Candies           |              |               |
+| 2134       | Minimum Swaps to Group All 1's Together II                 |              |               |
+| 2156       | Find Substring With Given Hash Value                       |              |               |
+| 2260       | Minimum Consecutive Cards to Pick Up                       |              |               |
+| 2269       | Find the K-Beauty of a Number                              |              |               |
+| 2271       | Maximum White Tiles Covered by a Carpet                    |              |               |
+| 2302       | Count Subarrays With Score Less Than K                     |              |               |
+| 2379       | Minimum Recolors to Get K Consecutive Black Blocks         |              |               |
+| 2398       | Maximum Number of Robots Within Budget                     |              |               |
+| 2401       | Longest Nice Subarray                                      |              |               |
+| 2411       | Smallest Subarrays With Maximum Bitwise OR                 |              |               |
+| 2444       | Count Subarrays With Fixed Bounds                          |              |               |
+| 2461       | Maximum Sum of Distinct Subarray With Length K             |              |               |
+| 2516       | Take K of Each Character From Left and Right               |              |               |
+| 2524       | Maximum Frequency Score of a Substring                     |              |               |
+| 2528       | Maximize the Minimum Powered City                          |              |               |
+| 2537       | Count the Number of Good Subarrays                         |              |               |
+| 2555       | Maximize Win From Two Segments                             |              |               |
+| 2653       | Sliding Subarray Beauty                                    |              |               |
+| 2730       | Find the Longest Semi-Repetitive Substring                 |              |               |
+| 2743       | Count Substrings Without Repeating Characters              |              |               |
+| 2747       | Count Zero Request Servers                                 |              |               |
+| 2760       | Longest Even Odd Subarray With Threshold                   |              |               |
+| 2762       | Continuous Subarrays                                       |              |               |
+| 2779       | Maximum Beauty of an Array After Up to K Operations        |              |               |
+| 2781       | Length of the Longest Valid Substring                      |              |               |
+| 2799       | Count Complete Subarrays in an Array                       |              |               |
+| 2831       | Find the Longest Equal Subarray                            |              |               |
+| 2841       | Maximum Sum of Almost Unique Subarray                      |              |               |
+| 2875       | Minimum Size Subarray in Infinite Array                    |              |               |
+| 2902       | Count of Sub-Multisets With Bound Constraints              |              |               |
+| 2904       | Shortest and Lexicographically Smallest Substring          |              |               |
+| 2932       | Maximum Strong Pair XOR I                                  |              |               |
+| 2935       | Maximum Strong Pair XOR II                                 |              |               |
+| 2953       | Count Complete Substrings                                  |              |               |
+| 2958       | Length of Longest Subarray With at Most K Distinct Integer |              |               |
+| 2962       | Count Subarrays Where Max Element is at Least Twice Other  |              |               |
+| 2968       | Apply Operations to Maximize Score                         |              |               |
+| 2981       | Find Longest Special Substring That Can Be Converted to a  |              |               |
+| 2982       | Find Longest Special Substring That Is Palindromic         |              |               |
+| 3013       | Divide an Array Into Subarrays With Constraints            |              |               |
+| 3023       | Find Pattern in Infinite Stream I                          |              |               |
+| 3037       | Find Pattern in Infinite Stream II                         |              |               |
+| 3086       | Minimum Moves to Pick K Ones                               |              |               |
+| 3090       | Maximum Length Substring With Two Distinct Characters      |              |               |
+| 3095       | Shortest Subarray With OR at Least K I                     |              |               |
+| 3097       | Shortest Subarray With OR at Least K II                    |              |               |
+| 3134       | Find the Median of the Uniqueness Values of Subarrays      |              |               |
+| 3135       | Equalize Strings by Adding or Removing Characters          |              |               |
+| 3191       | Minimum Operations to Make Binary String Alternating       |              |               |
+| 3206       | Alternating Groups I                                       |              |               |
+| 3208       | Alternating Groups II                                      |              |               |
+| 3234       | Count the Number of Substrings With Exactly K Distinct     |              |               |
+| 3254       | Find the Power of K-Size Subarrays I                       |              |               |
+| 3255       | Find the Power of K-Size Subarrays II                      |              |               |
+| 3258       | Count Substrings That Satisfy K-Frequency Condition        |              |               |
+| 3261       | Count Substrings That Satisfy K-Frequency Condition II     |              |               |
+| 3297       | Count Substrings That Can Be Made Equal                    |              |               |
+| 3298       | Count Substrings That Can Be Made Equal II                 |              |               |
+| 3305       | Count of Substrings Containing Every Letter in the Alphabet|              |               |
+| 3306       | Count of Substrings Containing Every Letter at Least K Time|              |               |
+| 3318       | Find X-Sum of All K-Long Subarrays I                       |              |               |
+| 3321       | Find X-Sum of All K-Long Subarrays II                      |              |               |
+| 3323       | Minimize Connected Groups by Removing Edges                |              |               |
+| 3325       | Count Substrings With K-Frequency Condition                |              |               |
+| 3329       | Count Substrings With K-Frequency Condition II             |              |               |
+| 3346       | Maximum Frequency of an Element in Every Subarray of Size K|              |               |
+| 3347       | Maximum Frequency of an Element in Every Subarray of Size K|              |               |
+| 3364       | Minimum Positive Sum Subarray                              |              |               |
+| 3411       | Maximum Subarray With Equal Number of 0 and 1              |              |               |
+| 3413       | Maximum Coins From K Consecutive Cards                     |              |               |
+| 3420       | Count Non-Decreasing Subarrays After Modification          |              |               |
+| 3422       | Minimum Operations to Make Array Non-Decreasing            |              |               |
+| 3439       | Reschedule Meetings for Maximum Number of Non-Overlapping M|              |               |
+| 3445       | Maximum Difference Between Even and Odd Indexed Elements   |              |               |
+| 3505       | Minimum Operations to Make Array Alternating               |              |               |
+| 3578       | Count Partitions With Max-Min Difference Constraints       |              |               |
+| 3589       | Count Prime-Gap Balanced Subarrays                         |              |               |
+| 3634       | Minimum Removals to Balance Array                          |              |               |
+| 3652       | Best Time to Buy and Sell Stock Using Cooldown             |              |               |
