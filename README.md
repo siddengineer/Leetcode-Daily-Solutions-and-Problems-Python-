@@ -38,7 +38,7 @@ Fill only the "Date" column with all dates of the month in YYYY-MM-DD format. Le
 September-2025
 | Date       | Problem Name                           | Solution Link                     |
 |------------|--------------------------------------|-------------------------------------|
-| 2025-09-01 |                                      |                                     |
+| 2025-09-01 |  3227. Vowels Game in a String       |                                     |
 | 2025-09-02 |                                      |                                     |
 | 2025-09-03 |                                      |                                     |
 | 2025-09-04 |                                      |                                     |
