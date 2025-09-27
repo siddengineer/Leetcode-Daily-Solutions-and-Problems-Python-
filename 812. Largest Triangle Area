@@ -1,0 +1,75 @@
+🔎 Problem Restated
+
+We are given a set of points on a 2D plane.
+We need to find the maximum possible area of a triangle formed by choosing any 3 points.
+
+✨ Key Idea
+
+The area of a triangle given three points (x1,y1),(x2,y2),(x3,y3) can be computed using the Shoelace Formula (determinant method):
+Area = 0.5 * abs(x1 * (y2 - y3) + x2 * (y3 - y1) + x3 * (y1 - y2))
+
+Example 1
+
+Input:
+
+points = [[0,0],[0,1],[1,0],[0,2],[2,0]]
+Try triangle with points (0,2), (2,0), (0,0):
+Area = 0.5 * abs(x1 * (y2 - y3) + x2 * (y3 - y1) + x3 * (y1 - y2))
+So largest area = 2.0 ✅
+
+✅ Example 2
+
+Input:
+
+points = [[1,0],[0,0],[0,1]]
+
+
+Only possible triangle is with those 3 points:
+Area = 0.5 * abs(x1 * (y2 - y3) + x2 * (y3 - y1) + x3 * (y1 - y2))
+Answer = 0.5 ✅
+
+⚙️ Algorithm
+
+Initialize max_area = 0.
+
+Loop over all triplets of points (i, j, k).
+
+Compute area using shoelace formula.
+
+Update max_area.
+
+Return max_area.
+
+⏱️ Complexity
+
+We try all combinations of 3 points → O(n³).
+
+For n ≤ 50 (constraints in LeetCode), this is perfectly fine.
+
+
+class Solution(object):
+    def largestTriangleArea(self, points):
+        """
+        :type points: List[List[int]]
+        :rtype: float
+        """
+        def area(p1, p2, p3):
+            x1, y1 = p1
+            x2, y2 = p2
+            x3, y3 = p3
+            # Shoelace formula for triangle area
+            return abs(x1*(y2-y3) + x2*(y3-y1) + x3*(y1-y2)) / 2.0
+
+        n = len(points)
+        max_area = 0.0
+
+        for i in range(n):
+            for j in range(i+1, n):
+                for k in range(j+1, n):
+                    max_area = max(max_area, area(points[i], points[j], points[k]))
+
+        return max_area
+
+
+
+
