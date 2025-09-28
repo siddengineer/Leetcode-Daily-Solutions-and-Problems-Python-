@@ -65,7 +65,7 @@ September-2025
 | 2025-09-25 |                                      |                                     |
 | 2025-09-26 |                                      |                                     |
 | 2025-09-27 |812. Largest Triangle Area                                      |https://github.com/siddengineer/Leetcode-Daily-Solutions-and-Problems-Python-/blob/main/812.%20Largest%20Triangle%20Area                                     |
-| 2025-09-28 |                                      |                                     |
+| 2025-09-28 | LeetCode 976: Largest Perimeter Triangle.                                     |                                     |
 | 2025-09-29 |                                      |                                     |
 | 2025-09-30 |                                      |                                     |
 
