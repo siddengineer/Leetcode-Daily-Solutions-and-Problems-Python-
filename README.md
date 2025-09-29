@@ -35,6 +35,9 @@ Make the columns wide by adding extra spaces in headers and cells so I have plen
 Fill only the "Date" column with all dates of the month in YYYY-MM-DD format. Leave the other columns empty.
 
 
+
+
+
 September-2025
 | Date       | Problem Name                           | Solution Link                     |
 |------------|--------------------------------------|-------------------------------------|
