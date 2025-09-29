@@ -1,0 +1,123 @@
+Problem Restated in Simple Words
+
+We’re given a convex polygon with n vertices.
+Each vertex has a value (values[i]).
+
+When we triangulate (cut the polygon into triangles), each triangle’s weight = product of its 3 vertices’ values.
+
+We must find the minimum possible sum of all triangle weights after triangulation.
+
+Example Walkthrough
+Example: values = [3,7,4,5]
+
+Polygon has 4 sides, so after triangulation we must make 2 triangles.
+
+Two possible triangulations:
+
+Diagonal between vertices (7,5):
+
+Triangle: (3,7,5) → weight = 3*7*5 = 105
+
+Triangle: (7,4,5) → weight = 7*4*5 = 140
+
+Total = 245
+
+Diagonal between vertices (3,4):
+
+Triangle: (3,4,5) → weight = 3*4*5 = 60
+
+Triangle: (3,7,4) → weight = 3*7*4 = 84
+
+Total = 144 ✅ minimum
+
+Answer = 144
+
+Key Insight
+
+This is similar to Matrix Chain Multiplication DP problem.
+We must decide where to "cut" the polygon (which diagonal to draw first), and recursively solve smaller polygons.
+
+Dynamic Programming Approach
+
+We define:
+
+dp[i][j] = minimum triangulation score for polygon vertices between i and j (inclusive)
+
+Base case:
+
+If j - i < 2 → fewer than 3 vertices → cannot form a triangle → dp[i][j] = 0.
+
+Transition:
+
+Try every possible "middle" vertex k between i and j.
+
+Form a triangle (i, k, j) → score = values[i] * values[j] * values[k].
+
+Plus recursively solve two sub-polygons: dp[i][k] + dp[k][j].
+
+Formula:
+(dp[i][k]+dp[k][j]+values[i]⋅values[j]⋅values[k])
+
+Final answer: dp[0][n-1]
+
+Algorithm in Steps
+
+Let n = len(values).
+
+Create a 2D DP array dp[n][n], initialized with 0.
+
+Fill dp for increasing lengths of sub-polygons.
+
+For each (i, j), compute the minimum triangulation by trying all possible k.
+
+Return dp[0][n-1].
+
+1.class Solution(object):
+    def minScoreTriangulation(self, values):
+        """
+        :type values: List[int]
+        :rtype: int
+        """
+        n = len(values)
+        dp = [[0] * n for _ in range(n)]
+
+        # length = distance between i and j
+        for length in range(2, n):  # must be at least 2 apart to form a triangle
+            for i in range(n - length):
+                j = i + length
+                dp[i][j] = float('inf')
+                for k in range(i + 1, j):  # try every possible middle vertex
+                    cost = dp[i][k] + dp[k][j] + values[i] * values[j] * values[k]
+                    dp[i][j] = min(dp[i][j], cost)
+
+        return dp[0][n - 1]
+
+2.class Solution(object):
+    def minScoreTriangulation(self, values):
+        """
+        :type values: List[int]
+        :rtype: int
+        """
+        n = len(values)
+        dp = [[0] * n for _ in range(n)]
+
+        # length = distance between i and j
+        for length in range(2, n):  # must be at least 2 apart to form a triangle
+            for i in range(n - length):
+                j = i + length
+                dp[i][j] = 10**9   # big number instead of infinity
+                for k in range(i + 1, j):  # try every possible middle vertex
+                    cost = dp[i][k] + dp[k][j] + values[i] * values[j] * values[k]
+                    dp[i][j] = min(dp[i][j], cost)
+
+        return dp[0][n - 1]
+
+Complexity
+States: O(n^2) (because i and j define the subproblem).
+
+Transitions: For each state (i, j), we loop over k → O(n).
+
+Total complexity:
+O(n^3)
+
+Space complexity: O(n^2)
