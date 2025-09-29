@@ -70,7 +70,7 @@ September-2025
 | 2025-09-26 |                                      |                                     |
 | 2025-09-27 |812. Largest Triangle Area                                      |https://github.com/siddengineer/Leetcode-Daily-Solutions-and-Problems-Python-/blob/main/812.%20Largest%20Triangle%20Area                                     |
 | 2025-09-28 | LeetCode 976: Largest Perimeter Triangle.                                     |https://github.com/siddengineer/Leetcode-Daily-Solutions-and-Problems-Python-/blob/main/LeetCode%20976%3A%20Largest%20Perimeter%20Triangle.py                                     |
-| 2025-09-29 |1039. Minimum Score Triangulation of Polygon                                      |                                     |
+| 2025-09-29 |1039. Minimum Score Triangulation of Polygon                                      |https://github.com/siddengineer/Leetcode-Daily-Solutions-and-Problems-Python-/blob/main/1039.%20Minimum%20Score%20Triangulation%20of%20Polygon                                     |
 | 2025-09-30 |                                      |                                     |
 
 October (2025)
