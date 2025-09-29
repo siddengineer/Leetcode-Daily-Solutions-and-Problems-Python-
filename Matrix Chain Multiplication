@@ -1,0 +1,134 @@
+🚀 Matrix Chain Multiplication Explained
+
+We are given dimensions of matrices in an array arr[].
+
+If arr = [2, 1, 3, 4] →
+Matrices are:
+
+M1 = 2x1
+
+M2 = 1x3
+
+M3 = 3x4
+
+We need to decide order of multiplication so that total scalar multiplications are minimum.
+
+⚡ Rule:
+If multiplying m x n and n x p, cost = m * n * p.
+
+🔑 Observations
+
+Problem is not about the result of multiplication, but about minimizing number of operations.
+
+We can put brackets in different places → leads to different costs.
+
+This is Optimal Substructure → DP problem.
+
+Same subproblems repeat → Overlapping Subproblems.
+
+So, Dynamic Programming is best.
+
+🛠 Approaches
+1. Naive Recursion – O(2^n)
+
+We try all possible places to put brackets and recursively solve both parts.
+Base case: if only one matrix (i+1 == j) → cost = 0.
+
+✅ Code:
+
+import sys
+
+# Recursive approach
+def minMultRec(arr, i, j):
+    # Base case: only one matrix
+    if i + 1 == j:
+        return 0
+
+    res = sys.maxsize
+
+    # Try placing bracket at every possible k
+    for k in range(i + 1, j):
+        curr = minMultRec(arr, i, k) + minMultRec(arr, k, j) + arr[i] * arr[k] * arr[j]
+        res = min(res, curr)
+
+    return res
+
+def matrixMultiplication(arr):
+    n = len(arr)
+    return minMultRec(arr, 0, n - 1)
+
+# Example
+arr = [2, 1, 3, 4]
+print(matrixMultiplication(arr))  # Output: 20
+
+2. Top-Down DP (Memoization) – O(n^3)
+
+We store results of subproblems in memo[][].
+
+✅ Code:
+
+import sys
+
+def minMultRec(arr, i, j, memo):
+    if i + 1 == j:
+        return 0
+    
+    if memo[i][j] != -1:
+        return memo[i][j]
+    
+    res = sys.maxsize
+    for k in range(i + 1, j):
+        curr = minMultRec(arr, i, k, memo) + minMultRec(arr, k, j, memo) + arr[i] * arr[k] * arr[j]
+        res = min(res, curr)
+    
+    memo[i][j] = res
+    return res
+
+def matrixMultiplication(arr):
+    n = len(arr)
+    memo = [[-1 for _ in range(n)] for _ in range(n)]
+    return minMultRec(arr, 0, n - 1, memo)
+
+# Example
+arr = [2, 1, 3, 4]
+print(matrixMultiplication(arr))  # Output: 20
+
+3. Bottom-Up DP (Tabulation) – O(n^3)
+
+We iteratively fill a DP table.
+
+dp[i][j] = minimum cost of multiplying matrices from i to j.
+
+Start with small chain lengths and go up.
+
+✅ Code:
+
+def matrixMultiplication(arr):
+    n = len(arr)
+    
+    # Create DP table
+    dp = [[0] * n for _ in range(n)]
+    
+    # length = chain length
+    for length in range(2, n):  
+        for i in range(n - length):
+            j = i + length
+            dp[i][j] = float('inf')
+            
+            for k in range(i + 1, j):
+                cost = dp[i][k] + dp[k][j] + arr[i] * arr[k] * arr[j]
+                dp[i][j] = min(dp[i][j], cost)
+    
+    return dp[0][n - 1]
+
+# Example
+arr = [2, 1, 3, 4]
+print(matrixMultiplication(arr))  # Output: 20
+
+📊 Complexity
+
+Recursion (Naive) → O(2^n) (very slow)
+
+Top-Down DP (Memoization) → O(n^3) time, O(n^2) space
+
+Bottom-Up DP (Tabulation) → O(n^3) time, O(n^2) space
