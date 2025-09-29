@@ -34,7 +34,8 @@ Generate a Markdown table for the month of January 2026, with columns "Date", "P
 Make the columns wide by adding extra spaces in headers and cells so I have plenty of room to write.  
 Fill only the "Date" column with all dates of the month in YYYY-MM-DD format. Leave the other columns empty.
 
-
+Latest artciles:
+Matrix Chain Multiplication 
 
 
 
