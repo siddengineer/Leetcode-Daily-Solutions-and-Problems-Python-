@@ -35,7 +35,7 @@ Make the columns wide by adding extra spaces in headers and cells so I have plen
 Fill only the "Date" column with all dates of the month in YYYY-MM-DD format. Leave the other columns empty.
 
 Latest artciles:
-Matrix Chain Multiplication 
+Matrix Chain Multiplication: https://github.com/siddengineer/Leetcode-Daily-Solutions-and-Problems-Python-/blob/main/Matrix%20Chain%20Multiplication
 
 
 
