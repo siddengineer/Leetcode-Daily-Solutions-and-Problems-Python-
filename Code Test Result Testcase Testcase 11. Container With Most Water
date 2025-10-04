@@ -1,0 +1,82 @@
+🔹 Problem Restatement
+
+You are given an array height[] where:
+
+Index i is the position of a vertical line.
+
+Value height[i] is the height of that line.
+
+We need to find two lines that form the container which can hold the maximum water.
+
+👉 Water is limited by the shorter line and the distance between the two lines.
+
+🔹 Formula
+
+If you choose lines at index i and j:
+
+Area = (j - i) * min(height[i], height[j])
+
+
+We need to maximize this.
+
+🔹 Naive (Brute Force) Approach
+
+Check all pairs (i, j) → O(n²) time.
+Not efficient for large arrays.
+
+🔹 Optimal Solution (Two Pointer Technique 🚀)
+
+Start with two pointers: left = 0, right = n - 1.
+
+Compute area:
+
+area = (right - left) * min(height[left], height[right])
+
+
+Move the pointer with smaller height inward (because a taller line might increase the area).
+
+Repeat until left < right.
+
+⏱ Complexity:
+
+Time = O(n)
+
+Space = O(1)
+
+🔹 Code (Python)
+class Solution:
+    def maxArea(self, height):
+        left, right = 0, len(height) - 1
+        max_area = 0
+
+        while left < right:
+            # Calculate area
+            width = right - left
+            min_height = min(height[left], height[right])
+            area = width * min_height
+            max_area = max(max_area, area)
+
+            # Move the smaller pointer
+            if height[left] < height[right]:
+                left += 1
+            else:
+                right -= 1
+
+        return max_area
+
+🔹 Example Walkthrough
+
+Input:
+
+height = [1,8,6,2,5,4,8,3,7]
+
+
+Steps:
+
+left=0, right=8 → area = (8-0) * min(1,7) = 8
+
+Move left → left=1, right=8 → area = (8-1) * min(8,7) = 49 ✅ (max)
+
+Keep moving until left < right
+
+Answer = 49
