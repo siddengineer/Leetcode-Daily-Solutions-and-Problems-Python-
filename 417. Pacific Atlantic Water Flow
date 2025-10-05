@@ -1,159 +1,89 @@
-🧩 Problem Recap
+✅ Solution (DFS Approach)
+class Solution(object):
+    def pacificAtlantic(self, heights):
+        """
+        :type heights: List[List[int]]
+        :rtype: List[List[int]]
+        """
+        if not heights or not heights[0]:
+            return []
 
-We are given an n x n grid (maze[][]) where:
+        m, n = len(heights), len(heights[0])
 
-1 → free path
+        pacific = set()
+        atlantic = set()
 
-0 → blocked cell
-The rat starts at (0, 0) and must reach (n-1, n-1) using U, D, L, R moves, without visiting any cell twice.
+        directions = [(1,0), (-1,0), (0,1), (0,-1)]
 
-We must return all possible paths (in lexicographically sorted order).
+        # DFS function to mark reachable cells
+        def dfs(r, c, visited, prev_height):
+            # Out of bounds or height restriction
+            if (r < 0 or c < 0 or r >= m or c >= n or 
+                (r, c) in visited or heights[r][c] < prev_height):
+                return
 
-⚙️ Algorithm (Backtracking / DFS Approach)
-Step 1: Base Check
+            visited.add((r, c))
+            for dr, dc in directions:
+                dfs(r + dr, c + dc, visited, heights[r][c])
 
-If the starting cell (0, 0) or the destination (n-1, n-1) is 0, then no path exists — return [].
+        # Pacific Ocean → top and left edges
+        for c in range(n):
+            dfs(0, c, pacific, heights[0][c])  # Top row
+            dfs(m - 1, c, atlantic, heights[m - 1][c])  # Bottom row
 
-Step 2: Define Directions
+        # Pacific Ocean → left and Atlantic → right edges
+        for r in range(m):
+            dfs(r, 0, pacific, heights[r][0])  # Left column
+            dfs(r, n - 1, atlantic, heights[r][n - 1])  # Right column
 
-To move the rat, define possible directions in lexicographic order:
+        # Intersection → cells reachable by both oceans
+        result = list(pacific & atlantic)
+        return result
 
-D → (1, 0)
-L → (0, -1)
-R → (0, 1)
-U → (-1, 0)
+🧠 Concept Explanation
 
-Step 3: Use Depth-First Search (DFS)
+Key Idea:
 
-We perform a recursive DFS traversal:
+Instead of checking every cell if it can reach both oceans (slow),
+we start DFS from the oceans and mark cells that can reach them.
 
-Start from (0, 0) with an empty string path = "".
+If a cell can be reached from both oceans, it’s part of the result.
 
-For each valid direction:
+Pacific Ocean touches:
 
-Check if the next cell is within bounds.
+Top row and Left column
 
-Check if it’s not blocked (1).
+Atlantic Ocean touches:
 
-Check if it’s not already visited.
+Bottom row and Right column
 
-Mark the cell as visited.
+DFS Traversal:
+From each ocean border, move to neighboring cells that have equal or higher height
+(since water can flow from high → low, reverse thinking is used here).
 
-Move to the next cell (recursive call).
+Final Step:
+Return cells that are in both Pacific and Atlantic reachable sets.
 
-After exploring that path, backtrack (unmark the cell).
+🧩 Example
 
-Step 4: Base Case
-
-When the current cell = destination (n-1, n-1):
-
-Add the formed path string to the result list.
-
-Step 5: Sorting
-
-After DFS completes, return all collected paths sorted lexicographically.
-
-🔢 Pseudocode
-function ratInMaze(maze, n):
-    if maze[0][0] == 0 or maze[n-1][n-1] == 0:
-        return []
-
-    result = []
-    visited = matrix(n x n, False)
-    
-    directions = [(‘D’, 1, 0), (‘L’, 0, -1), (‘R’, 0, 1), (‘U’, -1, 0)]
-
-    function dfs(x, y, path):
-        if x == n-1 and y == n-1:
-            result.append(path)
-            return
-        
-        for (move, dx, dy) in directions:
-            newX = x + dx
-            newY = y + dy
-            if valid(newX, newY) and maze[newX][newY] == 1 and not visited[newX][newY]:
-                visited[newX][newY] = True
-                dfs(newX, newY, path + move)
-                visited[newX][newY] = False
-
-    visited[0][0] = True
-    dfs(0, 0, "")
-    return sorted(result)
-
-🧠 Example Walkthrough
 Input:
-maze = [
-  [1, 0, 0, 0],
-  [1, 1, 0, 1],
-  [1, 1, 0, 0],
-  [0, 1, 1, 1]
+
+heights = [
+  [1,2,2,3,5],
+  [3,2,3,4,4],
+  [2,4,5,3,1],
+  [6,7,1,4,5],
+  [5,1,1,2,4]
 ]
 
-Step-by-step:
 
-Start → (0,0)
+Output:
 
-Move Down → (1,0)
+[[4,0],[3,0],[3,1],[2,2],[1,3],[1,4],[0,4]]
 
-Down → (2,0)
+⚙️ Time & Space Complexity
 
-Right → (2,1)
+Time: O(m * n) — each cell visited at most twice (once for each ocean).
 
-Down → blocked ❌
-
-Right → (2,2) blocked ❌
-
-Backtrack
-
-Move Up → (1,1)
-
-Continue exploring until (3,3)
-
-✅ Found paths:
-
-DDRDRR
-DRDDRR
-
-⏱ Time & Space Complexity
-Complexity	Explanation
-Time: O(4^(n²))	Each cell can have up to 4 recursive calls (worst case).
-Space: O(n²)	For the recursion stack and visited matrix
-
-class Solution:
-    def ratInMaze(self, maze):
-        n = len(maze)
-        res = []
-        
-        # Check if start or end cell is blocked
-        if maze[0][0] == 0 or maze[n - 1][n - 1] == 0:
-            return res
-
-        # Directions: Down, Left, Right, Up (chosen lexicographically D, L, R, U)
-        directions = [('D', 1, 0), ('L', 0, -1), ('R', 0, 1), ('U', -1, 0)]
-
-        # Helper function for DFS
-        def dfs(x, y, path, visited):
-            # Base case — destination reached
-            if x == n - 1 and y == n - 1:
-                res.append(path)
-                return
-            
-            # Explore all possible directions
-            for move, dx, dy in directions:
-                nx, ny = x + dx, y + dy
-                # Check if next cell is valid
-                if 0 <= nx < n and 0 <= ny < n and maze[nx][ny] == 1 and not visited[nx][ny]:
-                    visited[nx][ny] = True
-                    dfs(nx, ny, path + move, visited)
-                    visited[nx][ny] = False  # backtrack
-        
-        # Initialize visited matrix
-        visited = [[False] * n for _ in range(n)]
-        visited[0][0] = True
-
-        # Start DFS
-        dfs(0, 0, "", visited)
-        
-        return sorted(res)
-
+Space: O(m * n) — recursion stack + visited sets.
 
