@@ -1,0 +1,159 @@
+🧩 Problem Recap
+
+We are given an n x n grid (maze[][]) where:
+
+1 → free path
+
+0 → blocked cell
+The rat starts at (0, 0) and must reach (n-1, n-1) using U, D, L, R moves, without visiting any cell twice.
+
+We must return all possible paths (in lexicographically sorted order).
+
+⚙️ Algorithm (Backtracking / DFS Approach)
+Step 1: Base Check
+
+If the starting cell (0, 0) or the destination (n-1, n-1) is 0, then no path exists — return [].
+
+Step 2: Define Directions
+
+To move the rat, define possible directions in lexicographic order:
+
+D → (1, 0)
+L → (0, -1)
+R → (0, 1)
+U → (-1, 0)
+
+Step 3: Use Depth-First Search (DFS)
+
+We perform a recursive DFS traversal:
+
+Start from (0, 0) with an empty string path = "".
+
+For each valid direction:
+
+Check if the next cell is within bounds.
+
+Check if it’s not blocked (1).
+
+Check if it’s not already visited.
+
+Mark the cell as visited.
+
+Move to the next cell (recursive call).
+
+After exploring that path, backtrack (unmark the cell).
+
+Step 4: Base Case
+
+When the current cell = destination (n-1, n-1):
+
+Add the formed path string to the result list.
+
+Step 5: Sorting
+
+After DFS completes, return all collected paths sorted lexicographically.
+
+🔢 Pseudocode
+function ratInMaze(maze, n):
+    if maze[0][0] == 0 or maze[n-1][n-1] == 0:
+        return []
+
+    result = []
+    visited = matrix(n x n, False)
+    
+    directions = [(‘D’, 1, 0), (‘L’, 0, -1), (‘R’, 0, 1), (‘U’, -1, 0)]
+
+    function dfs(x, y, path):
+        if x == n-1 and y == n-1:
+            result.append(path)
+            return
+        
+        for (move, dx, dy) in directions:
+            newX = x + dx
+            newY = y + dy
+            if valid(newX, newY) and maze[newX][newY] == 1 and not visited[newX][newY]:
+                visited[newX][newY] = True
+                dfs(newX, newY, path + move)
+                visited[newX][newY] = False
+
+    visited[0][0] = True
+    dfs(0, 0, "")
+    return sorted(result)
+
+🧠 Example Walkthrough
+Input:
+maze = [
+  [1, 0, 0, 0],
+  [1, 1, 0, 1],
+  [1, 1, 0, 0],
+  [0, 1, 1, 1]
+]
+
+Step-by-step:
+
+Start → (0,0)
+
+Move Down → (1,0)
+
+Down → (2,0)
+
+Right → (2,1)
+
+Down → blocked ❌
+
+Right → (2,2) blocked ❌
+
+Backtrack
+
+Move Up → (1,1)
+
+Continue exploring until (3,3)
+
+✅ Found paths:
+
+DDRDRR
+DRDDRR
+
+⏱ Time & Space Complexity
+Complexity	Explanation
+Time: O(4^(n²))	Each cell can have up to 4 recursive calls (worst case).
+Space: O(n²)	For the recursion stack and visited matrix
+
+class Solution:
+    def ratInMaze(self, maze):
+        n = len(maze)
+        res = []
+        
+        # Check if start or end cell is blocked
+        if maze[0][0] == 0 or maze[n - 1][n - 1] == 0:
+            return res
+
+        # Directions: Down, Left, Right, Up (chosen lexicographically D, L, R, U)
+        directions = [('D', 1, 0), ('L', 0, -1), ('R', 0, 1), ('U', -1, 0)]
+
+        # Helper function for DFS
+        def dfs(x, y, path, visited):
+            # Base case — destination reached
+            if x == n - 1 and y == n - 1:
+                res.append(path)
+                return
+            
+            # Explore all possible directions
+            for move, dx, dy in directions:
+                nx, ny = x + dx, y + dy
+                # Check if next cell is valid
+                if 0 <= nx < n and 0 <= ny < n and maze[nx][ny] == 1 and not visited[nx][ny]:
+                    visited[nx][ny] = True
+                    dfs(nx, ny, path + move, visited)
+                    visited[nx][ny] = False  # backtrack
+        
+        # Initialize visited matrix
+        visited = [[False] * n for _ in range(n)]
+        visited[0][0] = True
+
+        # Start DFS
+        dfs(0, 0, "", visited)
+        
+        return sorted(res)
+
+
