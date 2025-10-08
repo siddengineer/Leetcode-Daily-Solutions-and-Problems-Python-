@@ -1,0 +1,105 @@
+🧠 Problem Understanding
+
+We are given:
+
+An array rains where:
+
+rains[i] > 0 → It rains on lake rains[i].
+
+rains[i] == 0 → A dry day (you can dry any one lake).
+
+Your goal:
+✅ Avoid flooding → i.e., a lake should never get rain twice without being dried in between.
+
+⚙️ Algorithm Pattern
+
+This problem follows the Greedy + Hashmap + Binary Search (SortedList) pattern.
+
+Let’s break it down:
+
+1️⃣ Key Idea
+
+Track which lakes are full using a dictionary (full).
+
+Keep track of dry days (zero_days) where you can dry a lake.
+
+When it rains on a lake that is already full, we must:
+
+Find the earliest dry day after it was last filled.
+
+Use that dry day to empty this lake.
+
+If no such dry day exists → flood → return [].
+
+🧩 Algorithm Steps
+Step	Action	Data Structures Used
+1	Initialize answer array ans with all -1	ans = [-1] * len(rains)
+2	Maintain a dictionary full_lakes to store last day a lake was filled	{ lake: last_day_filled }
+3	Maintain a sorted list of zero days (zero_days)	SortedList() (from bisect or sortedcontainers)
+4	For each day i in rains:	
+- If rains[i] > 0: check if that lake is already full	If yes → find next dry day	
+- If rains[i] == 0: add it to available dry days	zero_days.add(i)	
+- If a dry day is used → remove it	zero_days.remove(day)	
+🧮 Code Implementation
+import bisect
+
+class Solution(object):
+    def avoidFlood(self, rains):
+        n = len(rains)
+        ans = [-1] * n
+        full_lakes = {}     # lake -> last rain day
+        zero_days = []      # sorted list of days with 0 rain
+        
+        for i, lake in enumerate(rains):
+            if lake == 0:
+                bisect.insort(zero_days, i)   # add dry day in sorted order
+                ans[i] = 1                    # default (any lake)
+            else:
+                if lake in full_lakes:
+                    # find dry day after last filled day
+                    last_rain_day = full_lakes[lake]
+                    idx = bisect.bisect_right(zero_days, last_rain_day)
+                    
+                    if idx == len(zero_days):
+                        return []  # no dry day available → flood
+                        
+                    dry_day = zero_days[idx]
+                    ans[dry_day] = lake       # dry this lake on that day
+                    zero_days.pop(idx)
+                
+                full_lakes[lake] = i          # mark lake as full
+        return ans
+
+
+🔍 Algorithm Pattern
+
+Pattern name:
+
+Greedy + Hashmap + Binary Search (Scheduling Problem)
+
+Key concepts involved:
+
+Greedy choice → always dry the lake that will flood next.
+
+HashMap → store last day of rain for each lake.
+
+Binary Search → efficiently find the next available dry day.
+
+Simulation → iterate through days and simulate the process.
+
+🧠 Complexity Analysis
+Type	Complexity
+Time	O(n log n) — due to binary search in sorted list
+Space	O(n) — for dictionary + list
+
+🧩 Example Trace
+Example: rains = [1, 2, 0, 0, 2, 1]
+Day	Rain	Action	Dry Days	Result
+0	1	Lake 1 full	[]	[-1]
+1	2	Lake 2 full	[]	[-1, -1]
+2	0	Add dry day	[2]	[-1, -1, 1]
+3	0	Add dry day	[2, 3]	[-1, -1, 1, 1]
+4	2	Need to dry lake 2 → dry day=2	[3]	[-1, -1, 2, 1, -1]
+5	1	Need to dry lake 1 → dry day=3	[]	[-1, -1, 2, 1, -1, -1]
+
+✅ Final Answer: [-1, -1, 2, 1, -1, -1]
