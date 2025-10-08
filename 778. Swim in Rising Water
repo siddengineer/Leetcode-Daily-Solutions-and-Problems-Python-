@@ -1,0 +1,370 @@
+🔍 Problem Understanding
+-----------------------------------------------Binary Search + DFS------------------------------------------------------------------------------------------------------
+We are given an n x n grid with elevations.
+We start from (0,0) and need to reach (n-1,n-1) as water rises.
+
+At any time t, we can only travel through cells whose elevation ≤ t.
+
+We need to find the minimum t such that there exists a path from (0,0) to (n-1,n-1).
+
+💡 Intuition
+
+The higher the t, the more cells become reachable.
+
+So, the function “can we reach the destination?” is monotonic:
+
+If we can reach for t = x, then we can reach for any t > x.
+
+Hence, we can apply binary search on t.
+
+⚙️ Approach
+1️⃣ Binary Search
+
+The minimum possible time = grid[0][0]
+
+The maximum possible time = max value in grid
+
+2️⃣ DFS Check
+
+For each mid value (t):
+
+Run DFS (or BFS) starting from (0,0).
+
+Only move to neighbors with elevation ≤ t.
+
+If (n-1,n-1) is reachable, then t is possible → search left half.
+
+Otherwise, search right half.
+
+🧠 Algorithm
+
+Initialize:
+
+left = grid[0][0]
+right = max(max(row) for row in grid)
+
+
+While left < right:
+
+mid = (left + right) // 2
+
+If canReach(mid) → right = mid
+
+Else → left = mid + 1
+
+Return left
+
+🧩 DFS Function
+def canReach(grid, t):
+    n = len(grid)
+    stack = [(0, 0)]
+    visited = set([(0, 0)])
+    
+    directions = [(1,0),(-1,0),(0,1),(0,-1)]
+    
+    while stack:
+        x, y = stack.pop()
+        if (x, y) == (n-1, n-1):
+            return True
+        for dx, dy in directions:
+            nx, ny = x+dx, y+dy
+            if 0 <= nx < n and 0 <= ny < n and (nx, ny) not in visited and grid[nx][ny] <= t:
+                visited.add((nx, ny))
+                stack.append((nx, ny))
+    return False
+
+✅ Complete Code
+class Solution:
+    def swimInWater(self, grid):
+        n = len(grid)
+
+        def canReach(t):
+            if grid[0][0] > t:
+                return False
+            stack = [(0, 0)]
+            visited = set([(0, 0)])
+            directions = [(1,0),(-1,0),(0,1),(0,-1)]
+            
+            while stack:
+                x, y = stack.pop()
+                if (x, y) == (n - 1, n - 1):
+                    return True
+                for dx, dy in directions:
+                    nx, ny = x + dx, y + dy
+                    if 0 <= nx < n and 0 <= ny < n and (nx, ny) not in visited and grid[nx][ny] <= t:
+                        visited.add((nx, ny))
+                        stack.append((nx, ny))
+            return False
+
+        left, right = grid[0][0], n * n - 1
+        while left < right:
+            mid = (left + right) // 2
+            if canReach(mid):
+                right = mid
+            else:
+                left = mid + 1
+        return left
+
+🕒 Complexity
+Step	Time	Space
+DFS (each check)	O(n²)	O(n²)
+Binary search steps	O(log(max_elevation))	—
+Total	O(n² log n²)	O(n²)
+🧾 Example Trace
+Input:
+grid = [[0,2],
+        [1,3]]
+
+Execution:
+
+mid = 1 → cannot reach (1,1)
+
+mid = 2 → cannot reach (1,1)
+
+----------------------------------------------------------Binary Search + BFS------------------------------------------------------------------------------------------
+
+🔍 Problem Recap
+
+We are given an n x n grid of elevations.
+At time t, you can only swim through cells where grid[i][j] <= t.
+You start at (0,0) and want to reach (n-1,n-1) as soon as possible.
+
+We must return the minimum t such that it’s possible to reach the bottom-right.
+
+💡 Approach: Binary Search + BFS
+Key Idea:
+
+If you can reach the end at time t, then you can also reach it for any time > t.
+✅ Monotonic property → Binary Search applies
+
+Plan:
+
+Binary search on time t between:
+
+low = grid[0][0]
+
+high = max elevation in grid
+
+For each mid = (low + high) // 2:
+
+Run BFS to see if (n-1,n-1) is reachable when t = mid.
+
+If reachable → try smaller time (high = mid)
+
+Else → try bigger time (low = mid + 1)
+
+🧠 BFS Logic
+
+At time t, BFS starts from (0,0) if grid[0][0] <= t.
+From each cell (x,y), move 4-directionally to adjacent (nx, ny) if:
+
+It’s within bounds
+
+Not visited yet
+
+And grid[nx][ny] <= t
+
+If we reach (n-1,n-1), return True.
+
+✅ Complete Code (Binary Search + BFS)
+from collections import deque
+
+class Solution:
+    def swimInWater(self, grid):
+        n = len(grid)
+
+        def canReach(t):
+            if grid[0][0] > t:
+                return False
+            q = deque([(0, 0)])
+            visited = set([(0, 0)])
+            directions = [(1,0), (-1,0), (0,1), (0,-1)]
+            
+            while q:
+                x, y = q.popleft()
+                if (x, y) == (n - 1, n - 1):
+                    return True
+                for dx, dy in directions:
+                    nx, ny = x + dx, y + dy
+                    if 0 <= nx < n and 0 <= ny < n and (nx, ny) not in visited and grid[nx][ny] <= t:
+                        visited.add((nx, ny))
+                        q.append((nx, ny))
+            return False
+
+        low, high = grid[0][0], n * n - 1
+        while low < high:
+            mid = (low + high) // 2
+            if canReach(mid):
+                high = mid
+            else:
+                low = mid + 1
+        return low
+
+🧾 Example Walkthrough
+Input:
+grid = [[0,2],
+        [1,3]]
+
+Steps:
+
+Binary search range: 0 → 3
+
+mid = 1 → cannot reach (1,1)
+
+mid = 2 → cannot reach (1,1)
+
+mid = 3 → reachable ✅
+✅ Output: 3
+
+🕒 Complexity
+Step	Time	Space
+BFS check	O(n²)	O(n²)
+Binary search	O(log(max_height))	—
+Total	O(n² log n²)	O(n²)
+mid = 3 → reachable ✅
+→ Minimum time = 3
+
+-------------------------------------------------------------------Dijkstra’s Algorithm on Elevation Grid-----------------------------------------------------------------
+
+🧮 Algorithm Explanation
+Step 1️⃣ — Priority Queue (Min Heap)
+
+Use a min-heap to always expand the cell with the lowest current time (elevation).
+
+Each heap element = (time, i, j) where time is the max elevation so far.
+
+Step 2️⃣ — Relax Neighbors
+
+For each neighbor (nx, ny):
+
+The cost to move = max(current_time, grid[nx][ny])
+
+If not visited, push that neighbor into the heap with this cost.
+
+Step 3️⃣ — Stop Condition
+
+When we pop the target cell (n-1, n-1) from the heap, its time is the minimum possible water level required.
+
+✅ Code Implementation
+import heapq
+
+class Solution:
+    def swimInWater(self, grid):
+        n = len(grid)
+        visited = [[False] * n for _ in range(n)]
+        directions = [(1,0), (-1,0), (0,1), (0,-1)]
+        
+        # Min-heap: (time, x, y)
+        heap = [(grid[0][0], 0, 0)]
+        visited[0][0] = True
+        
+        while heap:
+            time, x, y = heapq.heappop(heap)
+            
+            # If we reached bottom-right, return current time
+            if x == n - 1 and y == n - 1:
+                return time
+            
+            for dx, dy in directions:
+                nx, ny = x + dx, y + dy
+                if 0 <= nx < n and 0 <= ny < n and not visited[nx][ny]:
+                    visited[nx][ny] = True
+                    # The time to reach this neighbor = max of current elevation and next cell’s elevation
+                    new_time = max(time, grid[nx][ny])
+                    heapq.heappush(heap, (new_time, nx, ny))
+
+🧾 Example Trace
+Input:
+grid = [[0,2],
+        [1,3]]
+
+Steps:
+Step	Cell	Elevation	Path Max	Heap	Result
+1	(0,0)	0	0	[(0,0,0)]	—
+2	Pop (0,0) → push neighbors	—	—	[(2,0,1), (1,1,0)]	—
+3	Pop (1,1,0): path max=1	push (1,1) elev=3 → max=3	[(2,0,1), (3,1,1)]	—	
+4	Pop (0,1): elev=2 → no shorter path	[(3,1,1)]	—		
+5	Pop (1,1): elev=3 ✅ reached target → return 3				
+
+✅ Output: 3
+
+🧩 Complexity Analysis
+Aspect	Complexity
+Time	O(n² log n) → each cell pushed once into heap
+Space	O(n²) for visited + heap
+
+
+-------------------------------------------------------------------Prim’s Algorithm--------------------------------------------------------------------------------------
+
+💧 2️⃣ How Swim in Rising Water = Prim’s Algorithm
+Intuition:
+
+Think of each cell as a node.
+
+Edges connect 4-directionally adjacent cells.
+
+Edge weight = max(elevation of the two connected cells).
+
+The goal: find the minimum elevation path that connects start (0,0) to end (n-1,n-1).
+
+Prim’s algorithm naturally does this:
+
+It starts with (0,0) and repeatedly adds the lowest elevation edge that connects to an unvisited cell.
+
+The maximum edge added during this process — when we first connect to (n-1,n-1) — gives the minimum time required.
+
+⚙️ 3️⃣ Implementation Using Prim’s Algorithm
+
+Here’s how we write it in Python (it looks almost like Dijkstra’s, but the logic is “edge-based,” not path-based):
+
+import heapq
+
+class Solution:
+    def swimInWater(self, grid):
+        n = len(grid)
+        visited = [[False] * n for _ in range(n)]
+        heap = [(grid[0][0], 0, 0)]  # (elevation, x, y)
+        res = 0  # Tracks the maximum elevation we've added
+        directions = [(1,0), (-1,0), (0,1), (0,-1)]
+        
+        while heap:
+            elevation, x, y = heapq.heappop(heap)
+            if visited[x][y]:
+                continue
+            visited[x][y] = True
+            
+            # Water level must at least reach this elevation
+            res = max(res, elevation)
+            
+            # If we've reached the target, return result
+            if x == n - 1 and y == n - 1:
+                return res
+            
+            # Add all unvisited neighbors
+            for dx, dy in directions:
+                nx, ny = x + dx, y + dy
+                if 0 <= nx < n and 0 <= ny < n and not visited[nx][ny]:
+                    heapq.heappush(heap, (grid[nx][ny], nx, ny))
+
+🧩 4️⃣ Step-by-Step Explanation
+
+Let’s visualize for grid:
+
+[[0, 2],
+ [1, 3]]
+
+Step	Action	Heap (min elevation frontier)	Result (max elevation so far)
+1	Start at (0,0) elev=0	[(2,0,1), (1,1,0)]	0
+2	Pick (1,1,0) elev=1	[(2,0,1), (3,1,1)]	1
+3	Pick (0,1) elev=2	[(3,1,1)]	2
+4	Pick (1,1) elev=3 ✅ reach target	—	3
+
+✅ Output = 3
+
+🧮 5️⃣ Complexity
+Step	Complexity
+Each cell added once	O(n² log n)
+Space (visited + heap)	O(n²)
+
+
+
