@@ -1,0 +1,189 @@
+Problem Pattern
+
+This problem falls under a binary search / two-pointer pattern often used when:
+
+You have two arrays and need to find combinations satisfying a condition.
+
+The condition is monotonic (if spell * potion[i] >= success, then all potions to the right also satisfy it after sorting).
+
+You need counts or ranges rather than exact pairs.
+
+Pattern name: Binary search on sorted array for threshold / Counting pairs with monotonic property.
+
+Algorithm (Step by Step)
+
+Sort the potions array:
+
+Sorting helps because once a potion is strong enough, all potions to the right will also work.
+
+For each spell:
+
+Use binary search to find the first potion in potions that, when multiplied with the spell, meets or exceeds success.
+
+Binary search reduces complexity from O(m) to O(log m) per spell.
+
+Count successful pairs:
+
+Once you find the first successful potion at index idx, all potions from idx to the end are successful.
+
+Count = len(potions) - idx.
+
+Return the counts for each spell as a list.
+
+Binary Search Logic
+left = 0
+right = len(potions)
+
+while left < right:
+    mid = (left + right) // 2
+    if spell * potions[mid] >= success:
+        right = mid  # mid could be the first success
+    else:
+        left = mid + 1  # move right to find first success
+
+
+After the loop, left points to the first potion that works.
+
+If no potion works, left == len(potions) → count = 0.
+
+Time Complexity
+
+Sorting: O(m log m)
+
+Binary search per spell: O(n log m)
+
+Total: O(m log m + n log m) ✅ Efficient
+
+Example Trace
+spells = [5,1,3]
+potions = [1,2,3,4,5]
+success = 7
+
+
+Sorted potions: [1,2,3,4,5]
+
+Spell 5 → first success = 2 → count = 5 - 1 = 4
+
+Spell 1 → first success = 5 → count = 0
+
+Spell 3 → first success = 2 → count = 5 - 2 = 3
+
+Result: [4,0,3]
+
+class Solution(object):
+    def successfulPairs(self, spells, potions, success):
+        """
+        :type spells: List[int]
+        :type potions: List[int]
+        :type success: int
+        :rtype: List[int]
+        """
+        # Sort potions to use binary search
+        potions.sort()
+        n = len(potions)
+        result = []
+
+        # Helper function to find the first potion that makes the product >= success
+        def first_successful(potion_list, spell):
+            left, right = 0, n
+            while left < right:
+                mid = (left + right) // 2
+                if spell * potion_list[mid] >= success:
+                    right = mid
+                else:
+                    left = mid + 1
+            return left
+
+        # For each spell, find how many potions succeed
+        for spell in spells:
+            idx = first_successful(potions, spell)
+            result.append(n - idx)  # All potions from idx to end are successful
+
+        return result
+
+Two-Pointer Version (alternative approach)
+
+You could also solve it with two pointers if both arrays are sorted.
+
+Idea:
+
+Sort both spells and potions.
+
+Start i from 0 (spells) and j from end of potions.
+
+Move pointers based on product comparison with success.
+
+Complexity: O(n log n + m log m) for sorting + O(n + m) for traversal.
+
+Slightly trickier to implement and usually requires mapping results back to original spell indices.
+
+Sort spells with original indices so we can map results back.
+
+Sort potions.
+
+Use a pointer from the end of potions to count how many potions work for each spell.
+
+Here’s the code:
+
+class Solution(object):
+    def successfulPairs(self, spells, potions, success):
+        """
+        :type spells: List[int]
+        :type potions: List[int]
+        :type success: int
+        :rtype: List[int]
+        """
+        # Sort potions
+        potions.sort()
+        n = len(potions)
+        
+        # Keep original indices of spells
+        spells_with_idx = sorted([(spell, i) for i, spell in enumerate(spells)])
+        
+        result = [0] * len(spells)
+        j = n - 1  # pointer for potions
+        
+        # Traverse spells from smallest to largest
+        for spell, idx in spells_with_idx:
+            # Move pointer left until spell * potions[j] >= success
+            while j >= 0 and spell * potions[j] >= success:
+                j -= 1
+            # Count of successful potions for this spell
+            result[idx] = n - (j + 1)
+        
+        return result
+
+How it works
+
+Sort potions ascending.
+
+Sort spells but keep track of their original indices.
+
+Start j from the end of potions.
+
+For each spell:
+
+Move j left until the product is less than success.
+
+All potions to the right of j are successful.
+
+Store count in result[idx] to preserve original spell order.
+
+Example
+spells = [5,1,3]
+potions = [1,2,3,4,5]
+success = 7
+
+sol = Solution()
+print(sol.successfulPairs(spells, potions, success))  # Output: [4,0,3]
+
+
+✅ Output matches the problem examples.
+
+Comparison with binary search approach:
+
+Binary search: For each spell, search potions → O(n log m).
+
+Two-pointer: Traverse sorted spells and potions → O(n log n + m log m + n + m)
+
+Both are efficient, but two-pointer avoids repeated binary searches.
