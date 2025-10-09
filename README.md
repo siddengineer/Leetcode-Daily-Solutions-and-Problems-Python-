@@ -84,7 +84,7 @@ October (2025)
 | 2025-10-06 |778. Swim in Rising Water                                      |https://github.com/siddengineer/Leetcode-Daily-Solutions-and-Problems-Python-/blob/main/778.%20Swim%20in%20Rising%20Water                                     |
 | 2025-10-07 |1488. Avoid Flood in The City                                      |https://github.com/siddengineer/Leetcode-Daily-Solutions-and-Problems-Python-/blob/main/1488.%20Avoid%20Flood%20in%20The%20City                                     |
 | 2025-10-08 |2300. Successful Pairs of Spells and Potions                                      |https://github.com/siddengineer/Leetcode-Daily-Solutions-and-Problems-Python-/blob/main/2300.%20Successful%20Pairs%20of%20Spells%20and%20Potions                                     |
-| 2025-10-09 |                                      |                                     |
+| 2025-10-09 |3494. Find the Minimum Amount of Time to Brew Potions                                      |                                     |
 | 2025-10-10 |                                      |                                     |
 | 2025-10-11 |                                      |                                     |
 | 2025-10-12 |                                      |                                     |
