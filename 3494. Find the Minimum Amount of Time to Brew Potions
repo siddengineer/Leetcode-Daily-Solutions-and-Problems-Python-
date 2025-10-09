@@ -1,0 +1,179 @@
+🧠 Problem Understanding
+
+We have:
+
+n wizards with given skill[i]
+
+m potions with given mana[j]
+
+Each potion must be brewed by all wizards in order (wizard 0 → wizard 1 → ... → wizard n-1).
+The time it takes wizard i to process potion j is:​
+
+=skill[i]×mana[j]
+
+But there are two constraints:
+
+Each potion must pass sequentially through all wizards.
+
+A wizard can handle only one potion at a time.
+
+We want the minimum total completion time after all potions are brewed.
+
+⚙️ Concept — Job Scheduling / Flow Shop Scheduling
+
+This problem is like the flow shop scheduling problem, similar to the “Assembly Line Scheduling” or “Matrix Chain” dynamic scheduling.
+
+We simulate the brewing process using dynamic programming.
+
+Let’s define:
+minimum time when wizard i finishes brewing potion j.
+dp[i][j]=minimum time when wizard i finishes brewing potion j.
+Recurrence relation:
+
+Base case (wizard 0):
+
+dp[0][j]=dp[0][j−1]+skill[0]∗mana[j]
+
+(because wizard 0 must brew all potions sequentially)
+
+For other wizards:
+
+dp[i][j]=max(dp[i−1][j],dp[i][j−1])+skill[i]∗mana[j]
+
+Explanation:
+
+dp[i-1][j] = when potion j arrives from previous wizard
+
+dp[i][j-1] = when wizard i finishes the previous potion
+
+The wizard can only start after both are ready → take the max
+
+Then add the time it takes for this wizard to process the current potion
+
+
+class Solution:
+    def minTime(self, skill, mana):
+        n, m = len(skill), len(mana)
+
+        # cumulative time for each wizard up to the current potion
+        prev_cum = [0] * n
+        starts = [0] * m
+
+        # Process first potion
+        total = 0
+        for i in range(n):
+            total += skill[i] * mana[0]
+            prev_cum[i] = total
+        # starts[0] = 0, nothing to do
+
+        # Process next potions
+        for j in range(1, m):
+            # compute current cumulative for potion j
+            curr_cum = [0] * n
+            total = 0
+            for i in range(n):
+                total += skill[i] * mana[j]
+                curr_cum[i] = total
+
+            # compute best delta (time gap between potion j and j-1)
+            best_delta = 0
+            prev_val = 0
+            for i in range(n):
+                left = prev_cum[i]
+                right = prev_val
+                best_delta = max(best_delta, left - right)
+                prev_val = curr_cum[i]
+
+            # non-decreasing starts
+            starts[j] = starts[j - 1] + max(0, best_delta)
+
+            # move curr to prev for next iteration
+            prev_cum = curr_cum
+
+        # total finish time = start of last potion + total time for last potion
+        return starts[-1] + prev_cum[-1]
+
+🧩 Approach Pattern: Prefix Sum + Greedy Time Synchronization
+🔹 Core Idea
+
+The problem asks for the minimum total synchronized time for brewing all potions sequentially through all wizards.
+
+Each wizard adds time proportional to their skill[i] * mana[j].
+
+Potions must move through wizards in order, without overlap or delay violations.
+
+Instead of simulating all n × m timings (which is huge), this approach converts the process into a mathematical recurrence that uses prefix sums of wizard skills and relative changes in mana between consecutive potions.
+
+🧮 Step-by-Step Pattern Explanation
+Step 1: Build prefix sum of skills
+S[i] = skill[0] + skill[1] + ... + skill[i]
+
+
+This means S[i] = total skill of wizards up to index i.
+Used to calculate cumulative brewing time up to each wizard efficiently.
+
+Step 2: Initialize total time
+total = S[-1] * mana[-1]
+ans = total
+
+
+This represents the time taken for the last potion to pass through all wizards sequentially.
+
+Step 3: Iterate backwards through potions
+
+For each potion j → j+1, compute an additional synchronization delay needed:
+
+delta = mana[j] - mana[j + 1]
+mb = mana[j + 1]
+
+
+Then, find the maximum possible overlap difference:
+
+best = max_i( delta * S[i] + mb * skill[i] )
+
+
+This expression represents the bottleneck wizard index where overlap is maximum — i.e., the synchronization constraint that prevents starting potion j+1 too early.
+
+Step 4: Accumulate the minimum feasible total
+ans += best
+
+
+Gradually add all synchronization delays across consecutive potions to get the final brewing time.
+
+⚙️ Time & Space Complexity
+Metric	Complexity
+Time	O(n × m) (but with optimized arithmetic, faster in practice)
+Space	O(n)
+
+class Solution(object):
+    def minTime(self, skill, mana):
+
+        n, m = len(skill), len(mana)
+
+        # prefix sums of skills
+        S = [0]*n
+        S[0] = skill[0]
+        for i in range(1, n):
+            S[i] = S[i-1] + skill[i]
+
+        total = S[-1] * mana[-1]   # tail time of last potion through last wizard
+        ans = total
+
+        for j in range(m - 1):
+            delta = mana[j] - mana[j + 1]
+            mb = mana[j + 1]
+
+            # g_{j -> j+1} = max_i (delta * S_i + mb * skill_i)
+            best = float('-inf')
+            # local variables help Python speed a bit
+            Sj = S
+            sk = skill
+            for i in range(n):
+                v = delta * Sj[i] + mb * sk[i]
+                if v > best:
+                    best = v
+            ans += best
+
+        return ans
+                
+
