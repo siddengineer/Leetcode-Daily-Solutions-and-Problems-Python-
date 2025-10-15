@@ -1,0 +1,57 @@
+(Binary Search + Sliding Window)
+
+Observation: The maximum possible k is ≤ n//2.
+
+We can binary search on k (1 to n//2):
+
+For a given k, check if two adjacent subarrays of length k exist and are strictly increasing.
+
+To check efficiently, precompute lengths[i] = length of increasing subarray starting at i.
+
+A subarray starting at i is strictly increasing of length k if lengths[i] >= k.
+
+Then check if lengths[i] >= k and lengths[i+k] >= k.
+
+Binary search helps find the maximum k efficiently.
+
+Python Solution (Binary Search, O(n log n)):
+class Solution(object):
+    def maxIncreasingSubarrays(self, nums):
+        n = len(nums)
+        if n < 2:
+            return 0
+
+        # Precompute increasing lengths starting at each index
+        lengths = [1] * n
+        for i in range(n-2, -1, -1):
+            if nums[i] < nums[i+1]:
+                lengths[i] = lengths[i+1] + 1
+
+        # Check if there exists adjacent subarrays of length k
+        def can_find(k):
+            for i in range(n - 2*k + 1):
+                if lengths[i] >= k and lengths[i + k] >= k:
+                    return True
+            return False
+
+        # Binary search for max k
+        left, right = 1, n // 2
+        ans = 0
+        while left <= right:
+            mid = (left + right) // 2
+            if can_find(mid):
+                ans = mid
+                left = mid + 1
+            else:
+                right = mid - 1
+
+        return ans
+
+Test Cases:
+sol = Solution()
+print(sol.maxIncreasingSubarrays([2,5,7,8,9,2,3,4,3,1]))  # 3
+print(sol.maxIncreasingSubarrays([1,2,3,4,4,4,4,5,6,7]))  # 2
+print(sol.maxIncreasingSubarrays([-16,-4,14,-9,13]))      # 2
+
+
+✅ Passes tricky cases like [1,2,3,4,4,4,4,5,6,7].
