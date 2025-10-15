@@ -90,7 +90,7 @@ October (2025)
 | 2025-10-12 |                                      |                                     |
 | 2025-10-13 |                                      |                                     |
 | 2025-10-14 |                                      |                                     |
-| 2025-10-15 |3350. Adjacent Increasing Subarrays Detection II                                      |                                     |
+| 2025-10-15 |3350. Adjacent Increasing Subarrays Detection II                                      |https://github.com/siddengineer/Leetcode-Daily-Solutions-and-Problems-Python-/blob/main/3350.%20Adjacent%20Increasing%20Subarrays%20Detection%20II                                     |
 | 2025-10-16 |                                      |                                     |
 | 2025-10-17 |                                      |                                     |
 | 2025-10-18 |                                      |                                     |
