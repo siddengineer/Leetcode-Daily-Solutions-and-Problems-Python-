@@ -34,6 +34,8 @@ Generate a Markdown table for the month of January 2026, with columns "Date", "P
 Make the columns wide by adding extra spaces in headers and cells so I have plenty of room to write.  
 Fill only the "Date" column with all dates of the month in YYYY-MM-DD format. Leave the other columns empty.
 
+<img width="1080" height="1080" alt="lg202509" src="https://github.com/user-attachments/assets/79d1c1c9-b458-4b8a-84f7-f0b5d770f1ca" />
+
 Latest artciles:
 Matrix Chain Multiplication: https://github.com/siddengineer/Leetcode-Daily-Solutions-and-Problems-Python-/blob/main/Matrix%20Chain%20Multiplication
 
