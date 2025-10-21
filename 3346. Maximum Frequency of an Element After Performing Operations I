@@ -1,0 +1,103 @@
+💡 Problem Understanding
+
+We are given:
+
+nums: a list of integers
+
+k: range limit for how much we can add/subtract (i.e., [-k, k])
+
+numOperations: how many distinct indices we can change.
+
+In each operation, we can modify one unique element of nums by adding any integer in the range [-k, k].
+
+Our goal:
+👉 Find the maximum possible frequency of any number after exactly numOperations operations.
+
+🧠 Intuition
+
+After changing an element by at most k, it can become any value in [nums[i] - k, nums[i] + k].
+
+We want to overlap these ranges as much as possible to make the same number appear more times.
+
+Sort nums — this helps in checking contiguous ranges efficiently.
+
+We can use a sliding window approach to find the largest group of numbers whose values can be made equal within numOperations allowed changes.
+
+⚙️ Approach
+
+Sort nums.
+
+Use two pointers (left, right) to represent a window of possible values.
+
+For each nums[right], we count how many numbers from left to right can become equal to nums[right] within ±k.
+
+If the number of required operations exceeds numOperations, move left forward.
+
+Track the maximum window size (frequency).
+
+
+import bisect
+from collections import Counter
+
+class Solution(object):
+    def maxFrequency(self, nums, k, numOperations):
+        """
+        :type nums: List[int]
+        :type k: int
+        :type numOperations: int
+        :rtype: int
+        """
+        if not nums:
+            return 0
+
+        n = len(nums)
+        nums.sort()
+        freq = Counter(nums)
+
+        # 1) For v equal to some nums value: use binary search to count how many intervals cover v.
+        ans = 1
+        for v, cnt_equal in freq.items():
+            left = bisect.bisect_left(nums, v - k)
+            right = bisect.bisect_right(nums, v + k)
+            total_in_range = right - left
+            possible = min(total_in_range, cnt_equal + numOperations)
+            if possible > ans:
+                ans = possible
+
+        # 2) For v NOT equal to any existing number:
+        # We only need the maximum overlap of intervals [nums[i]-k, nums[i]+k].
+        # For such v, count_equal = 0 => achievable = min(overlap, numOperations).
+        events = []
+        for x in nums:
+            L = x - k
+            R = x + k
+            # inclusive interval [L, R] => +1 at L, -1 at R+1 for integer sweep
+            events.append((L, 1))
+            events.append((R + 1, -1))
+
+        events.sort()
+        cur = 0
+        max_overlap = 0
+        for _, delta in events:
+            cur += delta
+            if cur > max_overlap:
+                max_overlap = cur
+
+        # best possible by choosing some new v (not in nums)
+        ans = max(ans, min(max_overlap, numOperations))
+
+        return ans
+Complexity
+
+Sorting: O(n log n)
+
+Counting per distinct v: for m distinct values, O(m log n) (binary searches)
+
+Sweep for overlap: O(n log n) for sorting events and O(n) sweep
+Overall O(n log n) time and O(n) space.
+
+This fixes both previously failing examples:
+
+[1,90], k=76, numOperations=1 → 1
+
+[88,53], k=27, numOperations=2 → 2
