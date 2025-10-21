@@ -29,6 +29,12 @@ Welcome to a curated collection of daily LeetCode problems solved in multiple pr
 
 <img width="300" height="300" alt="21 10 2025_11 37 17_REC" src="https://github.com/user-attachments/assets/407c8f88-8b0c-4f1e-8889-1e712d5719ab" /> https://leetcode.com/u/SFTEWk4YLU/
 
+<a href="https://leetcode.com/u/SFTEWk4YLU/" target="_blank">
+  <img width="300" height="300" alt="21 10 2025_11 37 17_REC" src="https://github.com/user-attachments/assets/407c8f88-8b0c-4f1e-8889-1e712d5719ab" />
+</a>
+
+<img width="187" height="101" alt="21 10 2025_12 11 08_REC" src="https://github.com/user-attachments/assets/3097c263-98ed-4aa4-8bb5-e68ef3198a13" />
+
 ## ⭐ Star this repo if it helps you level up your coding skills!
 
 TablePrompt:
