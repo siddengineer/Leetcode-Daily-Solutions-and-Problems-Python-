@@ -27,7 +27,7 @@ Welcome to a curated collection of daily LeetCode problems solved in multiple pr
 - Try solving problems yourself before checking solutions
 - Practice regularly to build confidence and speed
 
-
+https://leetcode.create-social-card.top/8shld8p
 ## ⭐ Star this repo if it helps you level up your coding skills!
 
 TablePrompt:
