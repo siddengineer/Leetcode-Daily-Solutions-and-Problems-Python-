@@ -1,0 +1,45 @@
+Pattern: Simulation / Iterative State Update
+
+Characteristics:
+
+You have an initial state (X = 0).
+
+You perform a sequence of operations that modify the state.
+
+The operations are applied in order.
+
+At the end, you report the final state.
+
+Key points:
+
+The problem doesn’t require complex data structures or algorithms.
+
+Each operation has a direct effect on the state (increment or decrement).
+
+You “simulate” the operations step by step to compute the final result.
+
+Similar Patterns/Problems:
+
+Increment / Decrement counters
+
+Stock profit/loss tracking (simulate changes day by day)
+
+Robot movement simulation (up/down/left/right)
+
+Bank account transactions (deposit/withdraw)
+
+
+
+class Solution(object):
+    def finalValueAfterOperations(self, operations):
+        """
+        :type operations: List[str]
+        :rtype: int
+        """
+        X = 0
+        for op in operations:
+            if "++" in op:  # increment for both '++X' and 'X++'
+                X += 1
+            elif "--" in op:  # decrement for both '--X' and 'X--'
+                X -= 1
+        return X
