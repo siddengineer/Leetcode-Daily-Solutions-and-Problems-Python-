@@ -26,7 +26,14 @@ Welcome to a curated collection of daily LeetCode problems solved in multiple pr
 - Review the solution code and explanations
 - Try solving problems yourself before checking solutions
 - Practice regularly to build confidence and speed
-
+<div style="position: relative; width: 100%; height: 0; padding-top: 70.1016%;
+ padding-bottom: 0; box-shadow: 0 2px 8px 0 rgba(63,69,81,0.16); margin-top: 1.6em; margin-bottom: 0.9em; overflow: hidden;
+ border-radius: 8px; will-change: transform;">
+  <iframe loading="lazy" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; border: none; padding: 0;margin: 0;"
+    src="https://www.canva.com/design/DAG2ZiRi9F8/e3Lqs8ccdTSo2R4kaKRQFw/view?embed" allowfullscreen="allowfullscreen" allow="fullscreen">
+  </iframe>
+</div>
+<a href="https:&#x2F;&#x2F;www.canva.com&#x2F;design&#x2F;DAG2ZiRi9F8&#x2F;e3Lqs8ccdTSo2R4kaKRQFw&#x2F;view?utm_content=DAG2ZiRi9F8&amp;utm_campaign=designshare&amp;utm_medium=embeds&amp;utm_source=link" target="_blank" rel="noopener">Design</a> by Siddharth Patil
 ## ⭐ Star this repo if it helps you level up your coding skills!
 
 TablePrompt:
