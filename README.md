@@ -33,7 +33,7 @@ TablePrompt:
 Generate a Markdown table for the month of January 2026, with columns "Date", "Problem Name", and "Solution Link".  
 Make the columns wide by adding extra spaces in headers and cells so I have plenty of room to write.  
 Fill only the "Date" column with all dates of the month in YYYY-MM-DD format. Leave the other columns empty.
-https://leetcode.com/SFTEWk4YLU/
+
 ![71c62ed7-80f2-4c84-a46e-07635932c4e5_1740028280 2879555](https://github.com/user-attachments/assets/78dd2f25-dfe2-4ab9-a759-5cd79c517fa4)
 
 
