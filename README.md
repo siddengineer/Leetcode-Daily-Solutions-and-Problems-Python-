@@ -27,7 +27,6 @@ Welcome to a curated collection of daily LeetCode problems solved in multiple pr
 - Try solving problems yourself before checking solutions
 - Practice regularly to build confidence and speed
 
-"https://www.canva.com/design/DAG2ZiRi9F8/e3Lqs8ccdTSo2R4kaKRQFw/view?embed"
 
 ## ⭐ Star this repo if it helps you level up your coding skills!
 
