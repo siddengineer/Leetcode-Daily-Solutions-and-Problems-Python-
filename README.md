@@ -95,7 +95,7 @@ October (2025)
 | 2025-10-17 |                                      |                                     |
 | 2025-10-18 |                                      |                                     |
 | 2025-10-19 |                                      |                                     |
-| 2025-10-20 |2011. Final Value of Variable After Performing Operations                                      |                                     |
+| 2025-10-20 |2011. Final Value of Variable After Performing Operations                                      |https://github.com/siddengineer/Leetcode-Daily-Solutions-and-Problems-Python-/blob/main/2011.%20Final%20Value%20of%20Variable%20After%20Performing%20Operations                                     |
 | 2025-10-21 |                                      |                                     |
 | 2025-10-22 |                                      |                                     |
 | 2025-10-23 |                                      |                                     |
