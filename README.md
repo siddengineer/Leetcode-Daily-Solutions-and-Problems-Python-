@@ -111,7 +111,7 @@ October (2025)
 | 2025-10-22 |                                      |                                     |
 | 2025-10-23 |                                      |                                     |
 | 2025-10-24 |                                      |                                     |
-| 2025-10-25 |                                      |                                     |
+| 2025-10-25 |Calculate the money in leetcode bank                                      |https://github.com/siddengineer/Leetcode-Daily-Solutions-and-Problems-Python-/blob/main/Math%20concept%20in%20Leetcode%20Bank.pdf                                     |
 | 2025-10-26 |                                      |                                     |
 | 2025-10-27 |                                      |                                     |
 | 2025-10-28 |                                      |                                     |
