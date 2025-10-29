@@ -115,7 +115,7 @@ October (2025)
 | 2025-10-25 |Calculate the money in leetcode bank                                      |https://github.com/siddengineer/Leetcode-Daily-Solutions-and-Problems-Python-/blob/main/Math%20concept%20in%20Leetcode%20Bank.pdf                                     |
 | 2025-10-26 |2043. Simple Bank System                                      |https://github.com/siddengineer/Leetcode-Daily-Solutions-and-Problems-Python-/blob/main/2043.%20Simple%20Bank%20System                                     |
 | 2025-10-27 |                                      |                                     |
-| 2025-10-28 |                                      |                                     |
+| 2025-10-28 |3354. Make Array Elements Equal to Zero                                      |                                     |
 | 2025-10-29 |                                      |                                     |
 | 2025-10-30 |                                      |                                     |
 | 2025-10-31 |                                      |                                     |
