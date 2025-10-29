@@ -1,0 +1,52 @@
+class Solution(object):
+    def countValidSelections(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        n = len(nums)
+        count = 0
+        
+        # Try starting from each zero
+        for i in range(n):
+            if nums[i] != 0:
+                continue
+                
+            for direction in [-1, 1]:  # -1 for left, 1 for right
+                arr = nums[:]  # copy to simulate
+                curr = i
+                move = direction
+                
+                while 0 <= curr < n:
+                    if arr[curr] == 0:
+                        curr += move
+                    else:
+                        arr[curr] -= 1
+                        move = -move
+                        curr += move
+                        
+                if all(x == 0 for x in arr):
+                    count += 1
+        
+        return count
+✅ How it works:
+Loop over each position in nums that is 0.
+
+Try both directions (left and right) as starting movement.
+
+Copy the array so we don’t modify the original.
+
+Follow the rules:
+
+If current is 0, move in the current direction.
+
+If current > 0, decrement it, reverse direction, move 1 step.
+
+After exiting the loop, check if all elements are 0. If yes, it’s a valid selection.
+
+Example:
+python
+Copy code
+sol = Solution()
+print(sol.countValidSelections([1,0,2,0,3]))  # Output: 2
+print(sol.countValidSelections([2,3,4,0,4,1,0]))  # Output: 0
