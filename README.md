@@ -41,6 +41,8 @@ Make the columns wide by adding extra spaces in headers and cells so I have plen
 Fill only the "Date" column with all dates of the month in YYYY-MM-DD format. Leave the other columns empty.
 
 ![71c62ed7-80f2-4c84-a46e-07635932c4e5_1740028280 2879555](https://github.com/user-attachments/assets/78dd2f25-dfe2-4ab9-a759-5cd79c517fa4)                                                ![25100](https://github.com/user-attachments/assets/d9962666-870c-46e7-b769-447177e10193)
+![202510 1](https://github.com/user-attachments/assets/a7cd6088-bf60-468d-8659-9e633daf722e)
+
 
 
 <img width="124" height="124" alt="lg202509" src="https://github.com/user-attachments/assets/79d1c1c9-b458-4b8a-84f7-f0b5d770f1ca" />
@@ -49,7 +51,7 @@ Latest artciles:
 Matrix Chain Multiplication: https://github.com/siddengineer/Leetcode-Daily-Solutions-and-Problems-Python-/blob/main/Matrix%20Chain%20Multiplication
 
 <img width="477" height="98" alt="25 10 2025_22 45 42_REC" src="https://github.com/user-attachments/assets/88bceaba-b483-4a0e-9011-84e3385e6f6c" /> 
- ![202510 1](https://github.com/user-attachments/assets/34aad39c-3e33-4c00-9636-0c2337a3ce75)
+
 
 
 
