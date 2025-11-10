@@ -1,0 +1,124 @@
+🧠 Intuition
+
+We have:
+
+c stations (1 … c)
+
+Some are connected → forming grids (connected components)
+
+Stations can go offline (but the grid structure stays)
+
+For a query [1, x]:
+
+If x is online, answer = x
+
+If x is offline, answer = smallest id online station in x’s grid
+
+If all in that grid are offline → answer = -1
+
+⚙️ Approach
+
+Build connected components using DSU (Union-Find).
+
+Every station belongs to a grid (component).
+
+Maintain a set of online stations for each grid.
+
+We need fast retrieval of smallest online ID per grid.
+
+Use SortedSet (from sortedcontainers) or a heapq.
+
+For query [1, x]:
+
+If x is online, return x.
+
+Else, find its grid → return min(online stations in that grid) or -1.
+
+For query [2, x]: mark x offline and remove from its grid’s online set.
+
+🧩 Code Implementation
+from collections import defaultdict
+from sortedcontainers import SortedSet
+
+class DSU:
+    def __init__(self, n):
+        self.parent = list(range(n + 1))
+    
+    def find(self, x):
+        if self.parent[x] != x:
+            self.parent[x] = self.find(self.parent[x])
+        return self.parent[x]
+    
+    def union(self, a, b):
+        pa, pb = self.find(a), self.find(b)
+        if pa != pb:
+            if pa < pb:
+                self.parent[pb] = pa
+            else:
+                self.parent[pa] = pb
+
+class Solution(object):
+    def processQueries(self, c, connections, queries):
+        dsu = DSU(c)
+        
+        # Step 1: Build the grids (union-find)
+        for u, v in connections:
+            dsu.union(u, v)
+        
+        # Step 2: Map grid -> set of online stations (sorted)
+        grids = defaultdict(SortedSet)
+        for i in range(1, c + 1):
+            grids[dsu.find(i)].add(i)
+        
+        # Step 3: Track online status
+        online = [True] * (c + 1)
+        
+        # Step 4: Process queries
+        ans = []
+        for qtype, x in queries:
+            root = dsu.find(x)
+            
+            if qtype == 1:
+                if online[x]:
+                    ans.append(x)
+                else:
+                    if grids[root]:
+                        ans.append(grids[root][0])  # smallest online station
+                    else:
+                        ans.append(-1)
+            
+            elif qtype == 2:
+                if online[x]:
+                    online[x] = False
+                    grids[root].discard(x)
+        
+        return ans
+
+🧮 Dry Run
+Example 1
+c = 5
+connections = [[1,2],[2,3],[3,4],[4,5]]
+queries = [[1,3],[2,1],[1,1],[2,2],[1,2]]
+
+
+Steps:
+
+Initially: all connected → single grid {1,2,3,4,5}
+
+Query 1 → [1,3] → online → answer 3
+
+Query 2 → [2,1] → 1 offline → remove from grid
+
+Query 3 → [1,1] → 1 offline → smallest online = 2 → answer 2
+
+Query 4 → [2,2] → 2 offline
+
+Query 5 → [1,2] → 2 offline → smallest online = 3 → answer 3
+
+✅ Output: [3, 2, 3]
+
+⏱️ Complexity
+Step	Time	Space
+DSU construction	O(c + n)	O(c)
+Each query	O(log c) (SortedSet ops)	O(c)
+Total	O((n + q) log c)	O(c)
