@@ -1,0 +1,179 @@
+🔍 Explanation
+
+For each subarray of length k:
+
+Count occurrences of all elements.
+
+Sort elements by:
+
+Frequency (descending)
+
+Value (descending)
+
+Pick top x elements and sum their total contribution.
+
+Append the sum to answer.
+
+This is fine for the "I" version (not optimized for large input, since constraints are small).
+
+✅ Code
+class Solution(object):
+    def findXSum(self, nums, k, x):
+        """
+        :type nums: List[int]
+        :type k: int
+        :type x: int
+        :rtype: List[int]
+        """
+        from collections import Counter
+        
+        n = len(nums)
+        ans = []
+        
+        for i in range(n - k + 1):
+            sub = nums[i:i + k]
+            freq = Counter(sub)
+            
+            # Sort by frequency (desc), then by value (desc)
+            sorted_items = sorted(freq.items(), key=lambda y: (-y[1], -y[0]))
+            
+            # Take top x frequent elements
+            top_x = [num for num, _ in sorted_items[:x]]
+            
+            # Sum of elements that belong to top x
+            total = sum(num for num in sub if num in top_x)
+            
+            ans.append(total)
+        
+        return ans
+
+🧠 Example Run
+# Example 1
+nums = [1,1,2,2,3,4,2,3]
+k = 6
+x = 2
+print(Solution().findXSum(nums, k, x))
+# Output: [6, 10, 12]
+
+# Example 2
+nums = [3,8,7,8,7,5]
+k = 2
+x = 2
+print(Solution().findXSum(nums, k, x))
+# Output: [11, 15, 15, 15, 12]
+
+
+🧠 Approach Name
+
+Sliding Window with Min-Heap for Top-X Frequency Tracking
+
+Although it doesn’t yet fully implement a sliding window optimization (it recomputes every subarray from scratch), conceptually, this is a
+👉 Heap-based frequency ranking approach.
+
+⚙️ Step-by-Step Explanation
+1️⃣ Iterate over every window of size k
+for i in range(0, n-k+1):
+    newNums = nums[i:i+k]
+
+
+For each window (subarray), we want to find the x-sum.
+
+2️⃣ Count frequency of each element
+mapp = {}
+for num in newNums:
+    mapp[num] = mapp.get(num, 0) + 1
+
+
+You get something like:
+
+Example: nums = [1,1,2,2,3,4]
+mapp = {1:2, 2:2, 3:1, 4:1}
+
+3️⃣ Maintain a Min-Heap of size x
+minHeap = []
+for val, freq in mapp.items():
+    item = (freq, val)
+    if len(minHeap) < x:
+        heapq.heappush(minHeap, item)
+    else:
+        heapq.heappushpop(minHeap, item)
+
+
+The heap stores tuples (frequency, value).
+
+Python’s heapq is a min-heap, so the least frequent / smallest element stays on top.
+
+As you push elements, if the heap grows beyond size x, you pop the smallest — ensuring only the top x frequent elements remain.
+
+⚠️ However, this version doesn’t yet handle tie-breaking by value properly (as required by the problem: “if two elements have same frequency, keep the bigger one”).
+You’d need to push tuples like (-freq, -val) or adjust sorting logic for that.
+
+4️⃣ Compute the X-sum
+summ = 0
+for freq, val in minHeap:
+    summ += freq * val
+
+
+Each remaining element contributes freq * val (e.g., if 2 appears 3 times, contributes 6).
+
+Add all top-x elements’ contributions.
+
+5️⃣ Store result
+res.append(summ)
+
+
+After processing all subarrays, return the result list.
+
+🧩 Example Walkthrough
+Input:
+nums = [1,1,2,2,3,4,2,3], k=6, x=2
+
+
+First window [1,1,2,2,3,4]
+
+Frequencies → {1:2, 2:2, 3:1, 4:1}
+
+Top 2 frequent → (1,2) → contributes 1*2 + 2*2 = 6
+
+Second window [1,2,2,3,4,2]
+
+{1:1, 2:3, 3:1, 4:1}
+
+Top 2 → (2,4) → contributes 2*3 + 4*1 = 10
+
+class Solution(object):
+    def findXSum(self, nums, k, x):
+        """
+        :type nums: List[int]
+        :type k: int
+        :type x: int
+        :rtype: List[int]
+        """
+        
+        n = len(nums)
+        res = []
+
+        for i in range(0, n-k+1):
+            newNums = nums[i: i+k]
+            
+            mapp = {}
+            for num in newNums:
+                mapp[num] = mapp.get(num, 0) + 1
+            
+            minHeap = []
+
+            for val, freq in mapp.items():
+                item = (freq, val)
+                if len(minHeap) < x:
+                    heapq.heappush(minHeap, item)
+                else:
+                    heapq.heappushpop(minHeap, item)
+
+            summ = 0
+            
+            for freq, val in minHeap:
+                summ += freq * val
+        
+            res.append(summ)
+            
+        return res 
