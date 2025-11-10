@@ -1,0 +1,139 @@
+🎯 Problem Understanding
+
+We are given:
+
+A linked list.
+
+An array of integers nums.
+
+We must delete all nodes from the linked list whose values appear in nums.
+
+Return the head of the modified list.
+
+🧩 Example 1
+Input:
+nums = [1, 2, 3]
+head = [1, 2, 3, 4, 5]
+
+Output:
+[4, 5]
+
+
+Explanation:
+All nodes with values in nums (1, 2, 3) are removed.
+
+🧩 Example 2
+Input:
+nums = [1]
+head = [1, 2, 1, 2, 1, 2]
+
+Output:
+[2, 2, 2]
+
+
+Explanation:
+All nodes with value 1 are removed.
+
+⚙️ Approach (Efficient & Simple)
+🧠 Key Idea:
+
+We want to remove all nodes from the linked list whose value is in nums.
+
+🔑 Steps:
+
+Convert nums into a set → allows O(1) lookup per value.
+
+Use a dummy node before the head (helps handle deletion of the head node easily).
+
+Use two pointers:
+
+prev (previous node)
+
+curr (current node)
+
+Traverse the linked list:
+
+If curr.val is in nums set, skip it (prev.next = curr.next)
+
+Else, move prev forward.
+
+Return dummy.next as new head.
+
+🧮 Algorithm
+nums_set = set(nums)      # Step 1
+dummy = ListNode(0)       # Step 2
+dummy.next = head
+prev, curr = dummy, head
+
+while curr:
+    if curr.val in nums_set:  # Step 4
+        prev.next = curr.next
+    else:
+        prev = curr
+    curr = curr.next
+
+return dummy.next             # Step 5
+
+🕒 Time and Space Complexity
+Operation	Complexity	Explanation
+Building set from nums	O(m)	m = len(nums)
+Traversing linked list	O(n)	n = no. of nodes
+Lookup per node	O(1)	average hash lookup
+Total Time	O(m + n)	Linear in both
+Space	O(m)	for storing nums in a set
+✅ Final Code
+# Definition for singly-linked list.
+class ListNode(object):
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+class Solution(object):
+    def modifiedList(self, nums, head):
+        """
+        :type nums: List[int]
+        :type head: Optional[ListNode]
+        :rtype: Optional[ListNode]
+        """
+        nums_set = set(nums)  # O(m)
+
+        dummy = ListNode(0)
+        dummy.next = head
+        prev, curr = dummy, head
+
+        while curr:  # O(n)
+            if curr.val in nums_set:
+                prev.next = curr.next  # skip this node
+            else:
+                prev = curr
+            curr = curr.next
+
+        return dummy.next  # new head
+
+🔍 Example Dry Run
+Input:
+nums = [1, 2, 3]
+head = [1, 2, 3, 4, 5]
+
+
+Step-by-step:
+
+nums_set = {1, 2, 3}
+dummy -> 0 -> 1 -> 2 -> 3 -> 4 -> 5
+
+curr = 1 → in nums_set → delete
+curr = 2 → in nums_set → delete
+curr = 3 → in nums_set → delete
+curr = 4 → keep
+curr = 5 → keep
+
+
+✅ Final list: 4 -> 5
+
+🧠 Key Takeaways
+
+Always use a dummy node when deleting nodes from a linked list.
+
+Use a set for O(1) lookup.
+
+O(n + m) is the optimal solution since every node and element is processed once.
