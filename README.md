@@ -129,7 +129,7 @@ November(2025)
 | 2025-11-01 |3217. Delete Nodes From Linked List Present in Array                                      |                                     |
 | 2025-11-02 |2257. Count Unguarded Cells in the Grid                                      |                                     |
 | 2025-11-03 |1578. Minimum Time to Make Rope Colorful                                      |                                     |
-| 2025-11-04 |3318. Find X-Sum of All K-Long Subarrays I                                        |                                     |
+| 2025-11-04 |3318. Find X-Sum of All K-Long Subarrays I                                        |https://github.com/siddengineer/Leetcode-Daily-Solutions-and-Problems-Python-/blob/main/3318.%20Find%20X-Sum%20of%20All%20K-Long%20Subarrays%20I                                     |
 | 2025-11-05 |3321. Find X-Sum of All K-Long Subarrays II                                       |                                     |
 | 2025-11-06 |3607. Power Grid Maintenance                  |https://github.com/siddengineer/Leetcode-Daily-Solutions-and-Problems-Python-/blob/main/3607.%20Power%20Grid%20Maintenance                                      |                                  
 | 2025-11-07 |2528. Maximize the Minimum Powered City                                   |https://github.com/siddengineer/Leetcode-Daily-Solutions-and-Problems-Python-/blob/main/2528.%20Maximize%20the%20Minimum%20Powered%20City                                     |
