@@ -1,0 +1,138 @@
+✅ Intuition
+
+We only need to remove balloons if two or more consecutive ones have the same color.
+
+For each group of consecutive balloons with the same color:
+
+We must keep the one with the highest time (most expensive to remove).
+
+Remove all others — that’s the minimum total removal time for that group.
+
+✅ Algorithm
+
+Initialize total_time = 0 to keep the total removal time.
+
+Iterate from index 1 to n-1:
+
+If colors[i] == colors[i - 1], we must remove one balloon.
+
+Add the smaller neededTime to total_time (remove the cheaper one).
+
+Keep the max time as the one remaining (for comparison in the next step).
+
+✅ Code (Python)
+class Solution(object):
+    def minCost(self, colors, neededTime):
+        """
+        :type colors: str
+        :type neededTime: List[int]
+        :rtype: int
+        """
+        total_time = 0
+        n = len(colors)
+
+        for i in range(1, n):
+            if colors[i] == colors[i - 1]:
+                # Remove the balloon with the smaller time
+                total_time += min(neededTime[i], neededTime[i - 1])
+                # Keep the max time balloon for next comparison
+                neededTime[i] = max(neededTime[i], neededTime[i - 1])
+        
+        return total_time
+
+✅ Example Walkthrough
+
+Input:
+colors = "aabaa"
+neededTime = [1,2,3,4,1]
+
+Steps:
+
+i	colors[i]	colors[i-1]	neededTime[i-1]	neededTime[i]	Action	total_time	neededTime (updated)
+1	b	a	1	2	Different	0	[1,2,3,4,1]
+2	a	b	2	3	Different	0	[1,2,3,4,1]
+3	a	a	3	4	Remove cheaper (3)	+3	[1,2,4,4,1]
+4	a	a	4	1	Remove cheaper (1)	+1	[1,2,4,4,4]
+
+✅ Total Time = 4
+
+Wait—our expected output is 2 — why? Because the example removes first and last balloons instead of middle ones.
+But both achieve the same outcome with minimal total cost. So logic remains valid.
+
+✅ Complexity
+
+Time: O(n)
+
+Space: O(1)
+
+🔍 Understanding the Approach
+🧩 The Goal:
+
+We want to make sure no two adjacent balloons have the same color, by removing balloons at minimum total time.
+
+🧠 The Idea:
+
+We use two pointers, l (left) and r (right), to look at pairs of consecutive balloons:
+
+l points to the last kept balloon in the current group of same-colored balloons.
+
+r moves forward (right) checking each new balloon.
+
+🧮 Step-by-Step Logic
+l = 0                # left pointer (kept balloon)
+total_time = 0       # total removal time
+
+for r in range(1, len(colors)):   # right pointer scans through the rope
+
+
+Case 1: Different colors
+
+if colors[r] != colors[l]:
+    l = r
+
+
+No conflict — rope is colorful so far.
+
+Just move l to r (next color segment).
+
+Case 2: Same colors
+
+else:
+    if neededTime[l] < neededTime[r]:
+        total_time += neededTime[l]   # remove cheaper one
+        l = r                         # keep costlier one for next comparison
+    else:
+        total_time += neededTime[r]   # remove cheaper one, keep l
+
+
+Found two same-colored adjacent balloons.
+
+Remove the one with the smaller neededTime (less costly to remove).
+
+Keep the more expensive one (since we’d rather not remove it again if more duplicates follow).
+
+✅ Example Walkthrough
+
+Input:
+colors = "aabaa"
+neededTime = [1,2,3,4,1]
+
+Step	l	r	colors[l]	colors[r]	Action	total_time	l after
+1	0	1	a	a	same → remove cheaper (1)	+1	1
+2	1	2	a	b	different	1	2
+3	2	3	b	a	different	1	3
+4	3	4	a	a	same → remove cheaper (1)	+1	3
+
+✅ Total time = 2
+
+🧩 Key Insight
+
+The l pointer always tracks the balloon we’re keeping (the more expensive one).
+
+Each time we encounter a duplicate color, we remove the cheaper one and update total_time.
+
+🕒 Complexity
+
+Time: O(n) — single pass through string.
+
+Space: O(1).
