@@ -126,17 +126,17 @@ November(2025)
 
 | Date       | Problem Name                           | Solution Link                         |
 |------------|--------------------------------------|-------------------------------------|
-| 2025-11-01 |                                      |                                     |
-| 2025-11-02 |                                      |                                     |
-| 2025-11-03 |                                      |                                     |
-| 2025-11-04 |                                      |                                     |
-| 2025-11-05 |                                      |                                     |
-| 2025-11-06 |                                      |                                     |
-| 2025-11-07 |                                      |                                     |
-| 2025-11-08 |                                      |                                     |
-| 2025-11-09 |                                      |                                     |
-| 2025-11-10 |1611. Minimum One Bit Operations to Make Integers Zero                                      |https://github.com/siddengineer/Leetcode-Daily-Solutions-and-Problems-Python-/blob/main/1611.%20Minimum%20One%20Bit%20Operations%20to%20Make%20Integers%20Zero                                      |
-| 2025-11-11 |2169. Count Operations to Obtain Zero                                      |https://github.com/siddengineer/Leetcode-Daily-Solutions-and-Problems-Python-/blob/main/2169.%20Count%20Operations%20to%20Obtain%20Zero                                     |
+| 2025-11-01 |3217. Delete Nodes From Linked List Present in Array                                      |                                     |
+| 2025-11-02 |2257. Count Unguarded Cells in the Grid                                      |                                     |
+| 2025-11-03 |1578. Minimum Time to Make Rope Colorful                                      |                                     |
+| 2025-11-04 |3318. Find X-Sum of All K-Long Subarrays I                                        |                                     |
+| 2025-11-05 |3321. Find X-Sum of All K-Long Subarrays II                                       |                                     |
+| 2025-11-06 |3607. Power Grid Maintenance        |                                   |                                     |
+| 2025-11-07 |2528. Maximize the Minimum Powered City                                   |                                     |
+| 2025-11-08 |1611. Minimum One Bit Operations to Make Integers Zero                                        |https://github.com/siddengineer/Leetcode-Daily-Solutions-and-Problems-Python-/blob/main/1611.%20Minimum%20One%20Bit%20Operations%20to%20Make%20Integers%20Zero                                                |
+| 2025-11-09 |2169. Count Operations to Obtain Zero                                       |https://github.com/siddengineer/Leetcode-Daily-Solutions-and-Problems-Python-/blob/main/2169.%20Count%20Operations%20to%20Obtain%20Zero                                    |
+| 2025-11-10 |                                |                           |
+| 2025-11-11 |                                   |                                    |
 | 2025-11-12 |                                      |                                     |
 | 2025-11-13 |                                      |                                     |
 | 2025-11-14 |                                      |                                     |
