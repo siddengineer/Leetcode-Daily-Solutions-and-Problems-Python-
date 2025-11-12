@@ -1,0 +1,75 @@
+Intuition
+
+You can only reduce numbers by replacing them with their GCD.
+
+The only way to make all elements equal to 1 is if the GCD of the entire array is 1 — because GCD never increases.
+
+If gcd(nums) > 1, it's impossible → return -1.
+
+If there is already a 1 in the array:
+
+Each non-1 element can be converted to 1 in one operation (using the existing 1 as a neighbor).
+
+So, operations = count(non_1_elements) = n - count(1s).
+
+If there is no 1:
+
+We need to find the smallest subarray whose GCD is 1.
+
+Suppose that subarray has length L.
+Then it will take (L - 1) operations to make a single 1.
+
+After getting one 1, we’ll need (n - 1) more operations to make all elements 1.
+
+➤ Total operations = (L - 1) + (n - 1) = n + L - 2
+
+💡 Algorithm
+
+If gcd(nums) > 1 → return -1
+
+If array already contains a 1 → return n - count(1)
+
+Else:
+
+For every index i, compute GCDs for subarrays starting from i.
+
+Stop when GCD becomes 1 → record length L.
+
+Keep track of the minimum L among all such subarrays.
+
+Return n + min_L - 2.
+
+
+from math import gcd
+
+class Solution(object):
+    def minOperations(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        n = len(nums)
+        overall_gcd = nums[0]
+        for num in nums:
+            overall_gcd = gcd(overall_gcd, num)
+        
+        # If GCD of whole array > 1, impossible
+        if overall_gcd > 1:
+            return -1
+        
+        # If there is already a 1, count how many operations to make all 1s
+        if 1 in nums:
+            return n - nums.count(1)
+        
+        # Otherwise, find the smallest subarray with GCD 1
+        min_len = float('inf')
+        for i in range(n):
+            g = nums[i]
+            for j in range(i + 1, n):
+                g = gcd(g, nums[j])
+                if g == 1:
+                    min_len = min(min_len, j - i + 1)
+                    break  # No need to extend further
+        
+        # Total operations = (min_len - 1) + (n - 1)
+        return n + min_len - 2
