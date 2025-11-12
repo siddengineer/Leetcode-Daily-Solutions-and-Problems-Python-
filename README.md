@@ -137,7 +137,7 @@ November(2025)
 | 2025-11-09 |2169. Count Operations to Obtain Zero                                       |https://github.com/siddengineer/Leetcode-Daily-Solutions-and-Problems-Python-/blob/main/2169.%20Count%20Operations%20to%20Obtain%20Zero                                    |
 | 2025-11-10 |                                |                           |
 | 2025-11-11 |                                   |                                    |
-| 2025-11-12 |                                      |                                     |
+| 2025-11-12 |2654. Minimum Number of Operations to Make All Array Elements Equal to 1                                      |                                     |
 | 2025-11-13 |                                      |                                     |
 | 2025-11-14 |                                      |                                     |
 | 2025-11-15 |                                      |                                     |
