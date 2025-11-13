@@ -1,0 +1,128 @@
+🔍 Problem Statement (in simple words)
+
+You are given a binary string s (which means it only contains '0' and '1').
+
+You can repeatedly perform an operation defined as follows:
+
+Choose an index i such that:
+
+s[i] == '1'
+
+and s[i + 1] == '0'
+
+Then move that '1' to the right until:
+
+It reaches the end of the string, or
+
+It is just before another '1'.
+
+You can do this operation any number of times (until no '10' pattern is left).
+You need to return the maximum number of such operations that can be performed.
+
+💡 Example 1
+Input:  s = "1001101"
+Output: 4
+
+Let's visualize step by step 👇
+
+Initial: "1001101"
+
+Operation	Choose i	Resulting String
+1	i=0 (the first '10')	"0011101"
+2	i=4	"0011011"
+3	i=3	"0010111"
+4	i=2	"0001111"
+
+After 4 operations, there are no '10' pairs left — all '1's are grouped at the end.
+✅ Answer = 4
+
+💡 Example 2
+Input:  s = "00111"
+Output: 0
+
+
+Here, there is no '10' pair (the string ends with all 1’s together already).
+So you cannot perform any move.
+✅ Answer = 0
+
+🧠 Intuitive Understanding
+
+Think of the string as a line of people ('1's) and empty spots ('0's).
+
+Each '1' wants to move as far to the right as possible — but only by swapping with a '0' that’s directly next to it.
+
+You keep moving the 1’s until:
+
+No '1' has a '0' next to it → process ends.
+
+You’re not asked to find how many swaps total happen,
+but rather how many operations (individual move actions) can occur before the string becomes “sorted” (all 1’s at the right end).
+
+⚙️ Algorithm (Step-by-Step)
+Step 1️⃣ — Initialize
+
+ones = 0 → number of '1's seen so far.
+
+ans = 0 → total operations count.
+
+Step 2️⃣ — Traverse string left to right
+
+For each character s[i]:
+
+If it’s '1': increment ones += 1.
+
+If it’s '0':
+
+Check if this '0' is the last character or followed by '1'.
+
+If yes → add ones to ans.
+
+Reason:
+All '1's before this '0' will eventually “pass” over it — each counts as one possible move.
+
+Step 3️⃣ — Return ans
+🧮 Dry Run 1 — "1001101"
+i	s[i]	Next	ones	ans	Explanation
+0	'1'	'0'	1	0	count 1
+1	'0'	'0'	1	0	skip
+2	'0'	'1'	1	1	add ones (1)
+3	'1'	'1'	2	1	count 1
+4	'1'	'0'	3	1	count 1
+5	'0'	'1'	3	4	add ones (3)
+6	'1'	-	4	4	done
+
+✅ Output = 4
+
+🧮 Dry Run 2 — "00111"
+i	s[i]	Next	ones	ans
+0	'0'	'0'	0	0
+1	'0'	'1'	0	0
+2	'1'	'1'	1	0
+3	'1'	'1'	2	0
+4	'1'	-	3	0
+
+✅ Output = 0
+
+⏱️ Time and Space Complexity
+Complexity	Explanation
+O(n)	Single traversal of string
+O(1)	Only a few counters used
+✅ Final Python Solution
+class Solution(object):
+    def maxOperations(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        ans = 0
+        ones = 0
+        n = len(s)
+
+        for i, ch in enumerate(s):
+            if ch == '1':
+                ones += 1
+            else:  # ch == '0'
+                # zero used as boundary (either end or before a '1')
+                if i + 1 == n or s[i + 1] == '1':
+                    ans += ones
+        return ans
