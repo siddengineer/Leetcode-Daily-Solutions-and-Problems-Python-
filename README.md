@@ -138,7 +138,7 @@ November(2025)
 | 2025-11-10 |                                |                           |
 | 2025-11-11 |                                   |                                    |
 | 2025-11-12 |2654. Minimum Number of Operations to Make All Array Elements Equal to 1                                      |https://github.com/siddengineer/Leetcode-Daily-Solutions-and-Problems-Python-/blob/main/2654.%20Minimum%20Number%20of%20Operations%20to%20Make%20All%20Array%20Elements%20Equal%20to%201                                     |
-| 2025-11-13 |                                      |                                     |
+| 2025-11-13 |3228: Maximum Number of Operations to Move Ones to the End                                      |                                     |
 | 2025-11-14 |                                      |                                     |
 | 2025-11-15 |                                      |                                     |
 | 2025-11-16 |                                      |                                     |
