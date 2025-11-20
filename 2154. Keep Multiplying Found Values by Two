@@ -1,0 +1,36 @@
+The logic is simple: keep checking if original is in nums. If it is, double it and continue; otherwise, return the value.
+
+Here’s a clean solution:
+
+class Solution(object):
+    def findFinalValue(self, nums, original):
+        """
+        :type nums: List[int]
+        :type original: int
+        :rtype: int
+        """
+        # Convert nums to a set for faster lookup
+        num_set = set(nums)
+        
+        # Keep multiplying while original is in the set
+        while original in num_set:
+            original *= 2
+        
+        return original
+
+
+✅ Explanation:
+
+Convert nums to a set for O(1) lookup instead of O(n) list search.
+
+Use a while loop to check if original is in the set.
+
+Multiply original by 2 every time it's found.
+
+When it's no longer found, return it.
+
+Example runs:
+
+sol = Solution()
+print(sol.findFinalValue([5,3,6,1,12], 3))  # Output: 24
+print(sol.findFinalValue([2,7,9], 4))        # Output: 4
