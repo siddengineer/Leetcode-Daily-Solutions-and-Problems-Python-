@@ -144,7 +144,7 @@ November(2025)
 | 2025-11-16 |                                      |                                     |
 | 2025-11-17 |                                      |                                     |
 | 2025-11-18 |                                      |                                     |
-| 2025-11-19 |2154. Keep Multiplying Found Values by Two                                      |                                     |
+| 2025-11-19 |2154. Keep Multiplying Found Values by Two                                      |https://github.com/siddengineer/Leetcode-Daily-Solutions-and-Problems-Python-/blob/main/2154.%20Keep%20Multiplying%20Found%20Values%20by%20Two                                     |
 | 2025-11-20 |757. Set Intersection Size At Least Two                                      |https://github.com/siddengineer/Leetcode-Daily-Solutions-and-Problems-Python-/blob/main/757.%20Set%20Intersection%20Size%20At%20Least%20Two                                     |
 | 2025-11-21 |                                      |                                     |
 | 2025-11-22 |                                      |                                     |
