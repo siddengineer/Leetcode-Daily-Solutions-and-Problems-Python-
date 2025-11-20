@@ -1,0 +1,81 @@
+We want to choose the minimum number of integers such that each interval contains at least 2 chosen numbers.
+
+Greedy Strategy
+
+Sort intervals
+
+Primary key: end ascending
+
+Secondary key: start descending
+(This ensures longer intervals get processed later so we don’t ruin earlier choices.)
+
+Maintain the two largest chosen numbers so far for each interval.
+
+When an interval [s, e] is processed:
+
+Check how many of our chosen numbers fall inside this interval.
+
+If < 2, we must add numbers, and the best choice is to add from the rightmost side (largest numbers), because this keeps maximum flexibility for future intervals.
+
+🎯 Greedy Logic Summary
+
+For each interval:
+
+Let the chosen set end with numbers A ≤ B
+
+Count how many of them fall inside [s, e]:
+
+If both A and B fit → do nothing
+
+If only B fits → add 1 more number: e - 1
+
+If none fit → add 2 numbers: e - 1 and e
+
+✅ Final Code (Python)
+class Solution(object):
+    def intersectionSizeTwo(self, intervals):
+        # 1. Sort intervals by end asc, start desc
+        intervals.sort(key=lambda x: (x[1], -x[0]))
+
+        # last two chosen numbers
+        a = -1
+        b = -1
+
+        ans = 0
+
+        for s, e in intervals:
+            # Case 1: both a and b are inside interval
+            if s <= a:
+                continue
+
+            # Case 2: only b is inside interval (but not a)
+            if s <= b:
+                # add one more element e-1
+                ans += 1
+                a = b
+                b = e
+            else:
+                # Case 3: none fit → add two elements
+                ans += 2
+                a = e - 1
+                b = e
+
+        return ans
+
+🧠 Time & Space Complexity
+
+Time: O(n log n) (sorting)
+
+Space: O(1)
+
+✅ Example Walkthrough
+intervals = [[1,3],[3,7],[8,9]]
+
+Sorted → [[1,3], [3,7], [8,9]]
+
+For [1,3] → choose {2,3}
+
+For [3,7] → previous chosen have only 3 → add 7 → set = {2,3,6,7}
+
+For [8,9] → choose {8,9}
+Total = 5
