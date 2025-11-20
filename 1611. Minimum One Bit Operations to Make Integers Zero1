@@ -1,0 +1,68 @@
+✅ Intuition
+
+This problem can be understood using Gray code transformation.
+
+The operation rules effectively describe transitions similar to Gray code sequences.
+
+The number of operations required to reach 0 from n equals the Gray code to binary conversion of n.
+
+So the trick is:
+
+Convert n (which behaves like a Gray code) back to its equivalent binary number.
+
+⚙️ Algorithm
+
+We can use a simple loop:
+
+While n is not zero:
+
+XOR n with its right-shifted version.
+
+Keep shifting right by 1 each iteration.
+
+The XOR propagates bits to convert Gray code → Binary.
+
+💻 Code Implementation
+class Solution(object):
+    def minimumOneBitOperations(self, n):
+        """
+        :type n: int
+        :rtype: int
+        """
+        res = 0
+        while n:
+            res ^= n
+            n >>= 1
+        return res
+
+🧩 Explanation with Example
+Example 1:
+n = 3 (binary: 11)
+
+
+Steps:
+
+res = 0
+n = 3: res = 0 ^ 3 = 3
+n = 1: res = 3 ^ 1 = 2
+n = 0: stop
+Answer = 2
+
+
+✅ Output → 2
+
+Example 2:
+n = 6 (binary: 110)
+
+
+Steps:
+
+res = 0
+n = 6: res = 0 ^ 6 = 6
+n = 3: res = 6 ^ 3 = 5
+n = 1: res = 5 ^ 1 = 4
+n = 0: stop
+Answer = 4
+
+
+✅ Output → 4
