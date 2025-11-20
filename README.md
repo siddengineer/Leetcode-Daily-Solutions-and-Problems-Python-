@@ -140,7 +140,7 @@ November(2025)
 | 2025-11-12 |2654. Minimum Number of Operations to Make All Array Elements Equal to 1                                      |https://github.com/siddengineer/Leetcode-Daily-Solutions-and-Problems-Python-/blob/main/2654.%20Minimum%20Number%20of%20Operations%20to%20Make%20All%20Array%20Elements%20Equal%20to%201                                     |
 | 2025-11-13 |3228: Maximum Number of Operations to Move Ones to the End                                      |https://github.com/siddengineer/Leetcode-Daily-Solutions-and-Problems-Python-/blob/main/Maximum%20Number%20of%20Operations%20to%20Move%20Ones%20to%20the%20End                                     |
 | 2025-11-14 |                                      |                                     |
-| 2025-11-15 |                                      |                                     |
+| 2025-11-15 |3234. Count the Number of Substrings With Dominant                                      |                                     |
 | 2025-11-16 |1513. Number of Substrings With Only 1s                                      |https://github.com/siddengineer/Leetcode-Daily-Solutions-and-Problems-Python-/blob/main/1513.%20Number%20of%20Substrings%20With%20Only%201s                                     |
 | 2025-11-17 |1437. Check If All 1's Are at Least Length K Places Away                                      |https://github.com/siddengineer/Leetcode-Daily-Solutions-and-Problems-Python-/blob/main/1437.%20Check%20If%20All%201's%20Are%20at%20Least%20Length%20K%20Places%20Away                                     |
 | 2025-11-18 |                                      |                                     |
