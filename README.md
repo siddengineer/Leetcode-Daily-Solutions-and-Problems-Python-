@@ -32,6 +32,7 @@ Welcome to a curated collection of daily LeetCode problems solved in multiple pr
 </a>
 
 <img width="187" height="101" alt="21 10 2025_12 11 08_REC" src="https://github.com/user-attachments/assets/3097c263-98ed-4aa4-8bb5-e68ef3198a13" />
+<img width="480" height="289" alt="image" src="https://github.com/user-attachments/assets/f28c679d-e6b3-401f-8170-25c33d6a3d3d" />
 
 ## ⭐ Star this repo if it helps you level up your coding skills!
 
