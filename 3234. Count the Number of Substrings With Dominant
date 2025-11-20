@@ -1,0 +1,215 @@
+✅ Understanding the condition
+
+A substring is dominant if:
+
+ones
+≥
+(
+zeros
+)
+2
+ones≥(zeros)
+2
+
+Let:
+
+zeros = z
+
+ones = o
+
+Since a substring length is 
+𝐿
+=
+𝑧
++
+𝑜
+L=z+o, the inequality becomes:
+
+𝑜
+≥
+𝑧
+2
+o≥z
+2
+🚀 Key Observations
+✔ 1. If zeros = 0
+
+Condition becomes:
+
+𝑜
+≥
+0
+o≥0
+
+Always true ⇒ Every all-ones substring is dominant.
+
+We can count all maximal "111...1" segments.
+
+✔ 2. If zeros ≥ 7
+𝑧
+2
+≥
+49
+z
+2
+≥49
+
+But max substring length is only 40,000.
+
+So if a substring contains ≥7 zeros:
+
+𝑜
+≥
+𝑧
+2
+≥
+49
+o≥z
+2
+≥49
+
+The substring must have ≥49 ones, meaning its length must be ≥56.
+
+This is possible but rare, and checking all substrings is impossible (O(n²)).
+
+⭐ Main Insight (Used in Accepted LC solution)
+
+The maximum zeros allowed in any dominant substring is:
+
+𝑧
+2
+≤
+len(s)
+⇒
+𝑧
+≤
+4
+×
+10
+4
+≈
+200
+z
+2
+≤len(s)⇒z≤
+4×10
+4
+	​
+
+≈200
+
+We only need to consider substrings with z ≤ 200.
+
+Thus we use a two-pointer approach where we count zeros and ones and stop when zeros > 200.
+
+🧠 Efficient Method (Two-Pointer Sliding Range per Zero Count)
+
+For each starting index i, expand j until:
+
+ones
+<
+(
+zeros
+)
+2
+ones<(zeros)
+2
+
+After this point the substring never becomes dominant again.
+
+Because zeros increases slowly (max 200), this is efficient
+class Solution(object):
+    def numberOfSubstrings(self, s):
+        n = len(s)
+
+        # Collect zero positions with sentinels
+        zeros = [-1]
+        for i, ch in enumerate(s):
+            if ch == '0':
+                zeros.append(i)
+        zeros.append(n)
+
+        m = len(zeros) - 2  # number of real zeros
+        ans = 0
+
+        # --- Case k = 0: count all-ones substrings ---
+        i = 0
+        while i < n:
+            if s[i] == '1':
+                j = i
+                while j < n and s[j] == '1':
+                    j += 1
+                L = j - i
+                ans += L * (L + 1) // 2
+                i = j
+            else:
+                i += 1
+
+        # Max zero count k needed: k^2 <= n
+        import math
+        K = int(n ** 0.5)
+
+        # --- Case k >= 1: windows with exactly k zeros ---
+        for k in range(1, K + 1):
+            if k > m:
+                break
+
+            need_sq = k * k
+
+            # windows of exactly k zeros:
+            # zeros[left_zero_idx] ... zeros[right_zero_idx]
+            for left_zero_idx in range(1, m - k + 2):
+                right_zero_idx = left_zero_idx + k - 1
+
+                # left extension choices
+                L = zeros[left_zero_idx] - zeros[left_zero_idx - 1]
+
+                # right extension choices
+                R = zeros[right_zero_idx + 1] - zeros[right_zero_idx]
+
+                # core ones inside window of zeros
+                core_len = zeros[right_zero_idx] - zeros[left_zero_idx] + 1
+                core_ones = core_len - k
+
+                need = need_sq - core_ones
+                total_pairs = L * R
+
+                if need <= 0:
+                    ans += total_pairs
+                    continue
+
+                # Count bad pairs where a + b < need
+                t = need
+
+                a_max = min(L - 1, t - 1)
+                if a_max < 0:
+                    bad = 0
+                else:
+                    split = t - R  # threshold for full R
+
+                    if split <= 0:
+                        # all use t - a
+                        bad = (a_max + 1) * t - (a_max * (a_max + 1) // 2)
+                    else:
+                        # some full R, some decreasing
+                        if split - 1 <= a_max:
+                            full_count = split
+                        else:
+                            full_count = a_max + 1
+
+                        sum_full = full_count * R
+
+                        rem = a_max - full_count
+                        if rem >= 0:
+                            u = full_count
+                            v = a_max
+                            sum_a = (u + v) * (v - u + 1) // 2
+                            sum_rem = (rem + 1) * t - sum_a
+                        else:
+                            sum_rem = 0
+
+                        bad = sum_full + sum_rem
+
+                ans += total_pairs - bad
+
+        return ans
