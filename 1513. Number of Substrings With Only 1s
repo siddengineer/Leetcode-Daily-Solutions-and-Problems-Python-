@@ -1,0 +1,46 @@
+Approach
+
+Initialize count = 0 for consecutive 1s and result = 0 for the total number of substrings.
+
+Iterate through the string:
+
+If the character is '1', increment count and add count to result.
+
+If the character is '0', reset count = 0.
+
+Since the answer may be large, return result % (10**9 + 7).
+
+Why this works:
+
+For a sequence of consecutive 1s of length k, the number of substrings is 1 + 2 + ... + k = k*(k+1)/2.
+
+By keeping a running count and adding it to result as we iterate, we are effectively summing all possible substrings ending at each 1.
+
+Python Code
+class Solution(object):
+    def numSub(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        MOD = 10**9 + 7
+        count = 0
+        result = 0
+        
+        for char in s:
+            if char == '1':
+                count += 1
+                result += count
+            else:
+                count = 0
+        
+        return result % MOD
+
+Test Cases
+sol = Solution()
+print(sol.numSub("0110111"))  # Output: 9
+print(sol.numSub("101"))      # Output: 2
+print(sol.numSub("111111"))   # Output: 21
+
+
+✅ This solution runs in O(n) time and O(1) space.
