@@ -1,0 +1,27 @@
+class Solution(object):
+    def minOperations(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        ans = 0
+        stack = []
+        for x in nums:
+            if x == 0:
+                # reset stack for new segment
+                stack[:] = []     # Python 2–safe equivalent of stack.clear()
+                continue
+
+            # pop elements greater than current
+            while stack and stack[-1] > x:
+                stack.pop()
+
+            # skip if current top is same
+            if stack and stack[-1] == x:
+                continue
+
+            # new distinct layer → new operation
+            stack.append(x)
+            ans += 1
+
+        return ans
