@@ -1,0 +1,25 @@
+class Solution(object):
+    def findMaxForm(self, strs, m, n):
+        """
+        :type strs: List[str]
+        :type m: int
+        :type n: int
+        :rtype: int
+        """
+        # Initialize a 2D DP table with dimensions (m+1) x (n+1)
+        dp = [[0] * (n + 1) for _ in range(m + 1)]
+        
+        # Process each string in the list
+        for s in strs:
+            zeros = s.count('0')
+            ones = s.count('1')
+            
+            # Traverse dp array backwards to avoid using the same string multiple times
+            for i in range(m, zeros - 1, -1):
+                for j in range(n, ones - 1, -1):
+                    dp[i][j] = max(dp[i][j], dp[i - zeros][j - ones] + 1)
+        
+        # The answer is stored at dp[m][n]
+        return dp[m][n]
+
+        
