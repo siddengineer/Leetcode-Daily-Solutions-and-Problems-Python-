@@ -1,0 +1,75 @@
+
+🔥 Intuition
+
+A length-3 palindrome must be of the form:
+
+x y x
+
+So we only need:
+
+a left x
+
+a right x
+
+some character y in between
+
+We want unique palindromes → unordered set.
+
+✅ Approach
+
+For each character 'a' to 'z':
+
+Find its first occurrence L
+
+Find its last occurrence R
+
+If L < R, then any character between L+1 and R-1 can be the middle y
+
+So the number of palindromes using outer character x is simply:
+
+count = number of distinct characters between L and R
+
+
+Keep summing for all 26 letters.
+
+This works in O(26 * n) which is optimal.
+
+✅ Fully Working Code (Python)
+class Solution(object):
+    def countPalindromicSubsequence(self, s):
+        first = {}
+        last = {}
+
+        # record first & last positions
+        for i, ch in enumerate(s):
+            if ch not in first:
+                first[ch] = i
+            last[ch] = i
+
+        ans = 0
+        
+        # try each possible outer character 'a' to 'z'
+        for ch in "abcdefghijklmnopqrstuvwxyz":
+            if ch in first and first[ch] < last[ch]:
+                L = first[ch]
+                R = last[ch]
+                middle_chars = set(s[L+1:R])
+                ans += len(middle_chars)
+
+        return ans
+
+✅ Why this works
+
+Example: "aabca"
+
+For 'a' → first = 0, last = 4
+Middle = "abc" → unique middle letters = {a, b, c} → contributes 3
+
+For 'b' or 'c' → no valid range
+
+Total = 3
+
+🎯 Time & Space Complexity
+Item	Complexity
+Time	O(26 * n)
+Space	O(n) due to slicing sets
