@@ -153,7 +153,7 @@ November(2025)
 | 2025-11-24 |                                      |                                     |
 | 2025-11-25 |                                      |                                     |
 | 2025-11-26 |                                      |                                     |
-| 2025-11-27 |3381. Maximum Subarray Sum With Length Divisible by K                                      |                                     |
+| 2025-11-27 |3381. Maximum Subarray Sum With Length Divisible by K                                      |https://github.com/siddengineer/Leetcode-Daily-Solutions-and-Problems-Python-/blob/main/3381.%20Maximum%20Subarray%20Sum%20With%20Length%20Divisible%20by%20K                                     |
 | 2025-11-28 |                                      |                                     |
 | 2025-11-29 |                                      |                                     |
 | 2025-11-30 |                                      |                                     |
