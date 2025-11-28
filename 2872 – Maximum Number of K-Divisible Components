@@ -1,0 +1,146 @@
+🔥 Intuition (Very Important)
+
+This is a tree DP + DFS + post-order sum aggregation problem.
+
+Goal:
+We want to cut (remove) some edges so that each resulting connected component’s sum is divisible by k.
+We want maximum number of such components.
+
+📌 Key Understanding
+
+If a subtree’s total sum % k == 0 →
+✔ we can cut the edge connecting it to its parent so it becomes its own separate component.
+
+If a subtree’s total sum % k != 0 →
+❌ we cannot cut; must return remainder to parent.
+
+✔️ DFS Strategy
+
+We do a DFS from root (any node, usually 0):
+
+For each node:
+
+Compute sum of its subtree.
+
+For each child subtree:
+
+If child_sum % k == 0 → this subtree becomes a full component.
+
+Else → add remainder to current node’s sum.
+
+After processing all children:
+
+If current node’s final sum % k == 0:
+
+It is a complete component, increase result count by 1.
+
+Return 0 to parent.
+
+Else:
+
+Return sum % k upward.
+
+📌 Why Post-Order DFS?
+
+We must compute children first → only then we know whether:
+
+child subtree becomes its own component
+
+or contributes remainder upward
+
+This is exactly post-order traversal logic.
+
+🧠 Important Notes for Revision (Your Notes)
+✓ Concept Used:
+
+✔ Tree DFS
+✔ Post-order processing
+✔ Remainder accumulation
+✔ Tree DP (bottom-up contributions)
+
+✓ THINK LIKE THIS:
+
+Each node returns subtree_sum % k to its parent.
+
+If remainder = 0 → one component ends here.
+
+You want as many “remainder = 0” points as possible.
+
+✓ This is similar to:
+
+Subtree sum divisible by k problems
+
+Cutting tree on valid boundaries
+
+Bottom-up DP on trees
+
+⭐ Final Working Code (Python)
+class Solution(object):
+    def maxKDivisibleComponents(self, n, edges, values, k):
+        from collections import defaultdict, deque
+
+        # Build adjacency list
+        g = defaultdict(list)
+        for a, b in edges:
+            g[a].append(b)
+            g[b].append(a)
+
+        self.components = 0
+
+        def dfs(node, parent):
+            total = values[node]
+
+            for child in g[node]:
+                if child == parent:
+                    continue
+
+                child_sum = dfs(child, node)
+
+                # If child subtree is divisible by k -> forms its own component
+                if child_sum % k == 0:
+                    self.components += 1
+                else:
+                    total += child_sum
+
+            return total
+
+        root_sum = dfs(0, -1)
+
+        # root is also a component if divisible
+        if root_sum % k == 0:
+            self.components += 1
+
+        return self.components
+
+🧪 Example Explanation (Short)
+Example 1
+
+Subtrees with sums divisible by 6:
+
+Child subtree sum = 12 → cut
+
+Remaining = 6 → cut
+✓ total = 2 components
+
+Example 2
+
+Subtrees divisible by 3:
+
+Several child subtrees divisible → cut them
+✓ total = 3 components
+
+🎯 Cheatsheet (Super Short Notes)
+DFS bottom-up
+subtree_sum = node_value + sum(child remainders)
+
+If child_sum % k == 0:
+    components++  (cut here)
+Else:
+    add child_sum to current
+
+After all children:
+    if subtree_sum % k == 0:
+        components++  (this subtree becomes component)
+        return 0
+    else:
+        return subtree_sum % k
