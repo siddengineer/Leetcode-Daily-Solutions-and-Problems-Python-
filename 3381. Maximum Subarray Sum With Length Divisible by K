@@ -1,0 +1,70 @@
+Approach
+
+Compute prefix sums:
+
+Let prefix[i] be the sum of the first i elements. That is:
+prefix[i]=nums[0]+nums[1]+...+nums[i−1]
+
+Use modulo trick:
+
+If a subarray nums[i:j] has length divisible by k, then (j - i) % k == 0.
+
+Using prefix sums, the sum of subarray nums[i:j] is prefix[j] - prefix[i].
+
+Length divisible by k implies i % k == j % k.
+
+Track minimum prefix sums modulo k:
+
+Maintain an array min_prefix of size k to store the minimum prefix sum seen so far for each modulo k.
+
+For each index j, compute j % k = r.
+
+The maximum subarray sum ending at j with length divisible by k is:
+
+)
+max_sum=max(max_sum,prefix[j]−min_prefix[r])
+Python Code
+class Solution(object):
+    def maxSubarraySum(self, nums, k):
+        """
+        :type nums: List[int]
+        :type k: int
+        :rtype: int
+        """
+        n = len(nums)
+        prefix = [0] * (n + 1)
+        
+        # Compute prefix sums
+        for i in range(n):
+            prefix[i + 1] = prefix[i] + nums[i]
+        
+        # Initialize min prefix sums for each modulo
+        min_prefix = [float('inf')] * k
+        min_prefix[0] = 0  # empty subarray sum
+        
+        max_sum = float('-inf')
+        
+        for j in range(1, n + 1):
+            r = j % k
+            # max sum ending at j with length divisible by k
+            max_sum = max(max_sum, prefix[j] - min_prefix[r])
+            # update minimum prefix sum for this modulo
+            min_prefix[r] = min(min_prefix[r], prefix[j])
+        
+        return max_sum
+
+✅ How It Works
+
+Example: nums = [-5,1,2,-3,4], k = 2
+
+Prefix sums: [0, -5, -4, -2, -5, -1]
+
+Track min_prefix modulo 2:
+
+min_prefix[0] tracks min prefix at indices 0,2,4,...
+
+min_prefix[1] tracks min prefix at indices 1,3,5,...
+
+Compute max_sum = 4 for subarray [1,2,-3,4] (length 4 divisible by 2)
+
+This solution is O(n) in time and O(k) in space, very efficient.
