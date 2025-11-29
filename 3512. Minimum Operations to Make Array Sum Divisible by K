@@ -1,0 +1,91 @@
+Category:
+✔ Maths → Modulo Arithmetic
+✔ Greedy
+✔ Array Sum Modulo K
+
+🔍 Understanding the Problem
+
+You want the sum of the array to be divisible by k.
+
+Let:
+
+sum = sum(nums)
+rem = sum % k
+
+
+If rem == 0 → answer = 0.
+
+Else you must reduce sum using operations.
+
+The only operation allowed:
+
+nums[i] = nums[i] - 1   (one operation)
+
+
+Each operation reduces total sum by 1.
+
+So if sum % k = rem, then:
+
+👉 You need rem operations.
+
+Because after doing rem decrements, the new sum becomes divisible by k.
+
+🎯 Key Insight
+✔ Only sum matters, not individual elements
+
+You do not need to think about which index to change.
+
+Since every "−1" reduces total sum by 1, minimum operations needed is:
+
+⭐ rem = sum(nums) % k
+
+Unless all elements become negative?
+🟢 No restriction — elements can become any number, even negative.
+So this formula always works.
+
+🧠 Final Formula
+operations = sum(nums) % k
+
+
+if remainder = 0 → return 0
+else return remainder
+
+✔ Example 1
+
+nums = [3, 9, 7], k = 5
+sum = 19
+19 % 5 = 4
+→ Need 4 operations
+
+Matches output.
+
+✔ Example 3
+
+nums = [3,2], k = 6
+sum = 5
+5 % 6 = 5
+→ Need 5 operations
+
+Matches output.
+
+🧵 Concept to Study
+⭐ Modulo Arithmetic
+
+Remainder handling
+
+Adjusting a number to be divisible by k
+
+(sum % k) logic
+
+⭐ Math-based Greedy
+
+Direct formula solution
+
+No DP / no prefix sums / no sorting
+
+🧩 Code (Python)
+class Solution:
+    def minOperations(self, nums, k):
+        total = sum(nums)
+        rem = total % k
+        return rem
