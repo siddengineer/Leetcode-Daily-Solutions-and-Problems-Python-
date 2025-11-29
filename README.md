@@ -155,7 +155,7 @@ November(2025)
 | 2025-11-26 |                                      |                                     |
 | 2025-11-27 |3381. Maximum Subarray Sum With Length Divisible by K                                      |https://github.com/siddengineer/Leetcode-Daily-Solutions-and-Problems-Python-/blob/main/3381.%20Maximum%20Subarray%20Sum%20With%20Length%20Divisible%20by%20K                                     |
 | 2025-11-28 |2872 – Maximum Number of K-Divisible Components                                      |https://github.com/siddengineer/Leetcode-Daily-Solutions-and-Problems-Python-/commit/01cdf9f40ab4074e6b082b179b133ec1d5534be6                                     |
-| 2025-11-29 |                                      |                                     |
+| 2025-11-29 |3512. Minimum Operations to Make Array Sum Divisible by K                                      |                                     |
 | 2025-11-30 |                                      |                                     |
 
 December:
