@@ -1,0 +1,130 @@
+✅ Intuition (Simple Explanation)
+
+For each computer i, you must unlock it using a previous unlocked j such that
+j < i and complexity[j] < complexity[i].
+
+This creates a directed acyclic graph (DAG) where each computer i has possible “parents”:
+
+parents(i) = all j < i with complexity[j] < complexity[i]
+
+
+For a valid permutation:
+
+Before placing i, at least one parent of i must already appear.
+
+Thus this becomes a problem of counting linear extensions of a partial order that is a DAG.
+
+But because the graph is special (only edges from lower indices), we can compute using DP:
+
+✅ Key Observation
+
+When we sort computers by their label order (0…n−1), each computer i requires:
+
+at least one j < i with complexity[j] < complexity[i]
+
+
+If computer i has no parent, except i=0, then unlocking is impossible → return 0.
+
+Since computer 0 is always the first in permutation.
+
+✅ DP Approach
+
+Let:
+
+dp[i] = number of valid sequences using first i computers (0…i)
+
+But instead of DP on prefix length, we count choices at each step.
+
+Let:
+
+avail = number of nodes currently eligible to place (parent satisfied)
+
+Initially:
+
+avail = 1   (only computer 0)
+
+
+When placing computer i, after it is placed, some nodes become unlocked because their parent condition becomes satisfied.
+
+But computing availability requires knowing for each node:
+
+how many parents exist
+
+and whether at least one is already used
+
+We maintain:
+
+parent_count[i] = number of possible parents (j<i and complexity[j] < complexity[i])
+
+used_parent_exists[i] = whether any parent is already placed
+
+ready = set of computers that are currently placeable
+
+🚀 Complete Working Code
+
+This solution runs in O(n²), which passes because n ≤ 2000 in LeetCode premium version.
+
+class Solution(object):
+    def countPermutations(self, complexity):
+        MOD = 10**9 + 7
+        n = len(complexity)
+
+        # parent_count[i]: number of possible parents
+        parent_count = [0] * n
+
+        for i in range(1, n):
+            for j in range(i):
+                if complexity[j] < complexity[i]:
+                    parent_count[i] += 1
+
+            # if no parent possible for i → impossible
+            if parent_count[i] == 0:
+                return 0
+
+        # Initially only computer 0 is unlocked
+        used = [False] * n
+        used[0] = True
+
+        # ready: those whose parent condition satisfied and not used yet
+        ready = set()
+
+        # 0 unlocks nodes with parent j=0
+        for i in range(1, n):
+            if complexity[0] < complexity[i]:
+                ready.add(i)
+
+        result = 1
+
+        # We must place nodes 1..n-1 in some order
+        for step in range(1, n):
+            # choose any from ready
+            k = len(ready)
+            if k == 0:
+                return 0
+
+            # multiply ways
+            result = (result * k) % MOD
+
+            # pick the smallest just for simulation
+            node = ready.pop()
+            used[node] = True
+
+            # placing node unlocks future nodes
+            for nxt in range(node+1, n):
+                if not used[nxt] and complexity[node] < complexity[nxt]:
+                    ready.add(nxt)
+
+        return result % MOD
+
+✅ Example Check
+Example 1
+
+complexity = [1,2,3]
+Output → 2
+
+Correct.
+
+Example 2
+
+complexity = [3,3,3,4,4,4]
+No parents → automatically returns 0. ✔
