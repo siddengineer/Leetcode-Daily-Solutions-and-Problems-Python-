@@ -46,7 +46,7 @@ Fill only the "Date" column with all dates of the month in YYYY-MM-DD format. Le
 ![1759325618032 (2)](https://github.com/user-attachments/assets/50b0a4c9-82db-453f-b602-3580912d347c)
 ![202510 1](https://github.com/user-attachments/assets/a7cd6088-bf60-468d-8659-9e633daf722e)
 ![202511](https://github.com/user-attachments/assets/d77e7ece-2dea-4941-9d3c-7ce7e734ff3c)
-<img width="50" height="50" alt="610db6a2-ac34-4ef5-922b-193422d9af45_1735690225 3787284" src="https://github.com/user-attachments/assets/c6cb5d94-1c69-4a66-9948-7728f532d5e5" />
+<img width="400" height="400" alt="610db6a2-ac34-4ef5-922b-193422d9af45_1735690225 3787284" src="https://github.com/user-attachments/assets/c6cb5d94-1c69-4a66-9948-7728f532d5e5" />
 
 Latest artciles:
 Matrix Chain Multiplication: https://github.com/siddengineer/Leetcode-Daily-Solutions-and-Problems-Python-/blob/main/Matrix%20Chain%20Multiplication
