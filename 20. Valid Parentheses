@@ -1,0 +1,36 @@
+class Solution(object):
+    def isValid(self, s):
+        """
+        :type s: str
+        :rtype: bool
+        """
+        st = []
+        for c in s:
+            if c == '(' or c == '{' or c == '[':
+                st.append(c)
+
+            elif c == ')' or c == '}' or c == ']':
+                if  not st: return False
+                top = st[-1]
+                if ((c == ')' and top != '(') or 
+                   (c == '}' and top != '{') or 
+                   (c == ']' and top != '[')):
+                   return False
+                   
+                st.pop()
+        return not st
+
+
+🟦 Time Complexity Analysis
+Line of Code	Operation	Time Complexity
+st = []	Create empty list	O(1)
+for c in s:	Loop runs n times	O(n)
+if c == '(' or c == '{' or c == '[':	Constant comparison	O(1)
+st.append(c)	Push into stack	O(1)
+elif c == ')' or c == '}' or c == ']':	Constant comparison	O(1)
+if not st:	Check empty stack	O(1)
+top = st[-1]	Access top element	O(1)
+Matching condition check	Constant comparison	O(1)
+st.pop()	Pop from stack	O(1)
+return not st	Final empty check	O(1)
+
